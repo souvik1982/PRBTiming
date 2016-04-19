@@ -1,0 +1,48 @@
+# Simplest PRB configuration
+
+Index: 0
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 0
+Parity: L
+OutputConnections: (1, 0, 0)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicR0
+ModuleID: 0
+Parity: R
+OutputConnections: (1, 0, 0)
+
+
+Index: 2
+ComponentType: Receiver
+ComponentName: rxL_0
+OutputConnections: (4, 0, 0)
+
+Index: 3
+ComponentType: Receiver
+ComponentName: rxR_0
+OutputConnections: (5, 0, 0)
+
+
+Index: 4
+ComponentType: BXSplitter
+ComponentName: bxSplitterL_0
+OutputConnections: 
+
+Index: 5
+ComponentType: BXSplitter
+ComponentName: bxSplitterR_0
+OutputConnections:
+
+
+Index: 6
+ComponentType: LayerSplitter
+ComponentName: layerSplitter1_0
+OutputConnections:
+
+Index: 7
+ComponentType: LayerSplitter
+ComponentName: layerSplitter2_0
+OutputConnections:
