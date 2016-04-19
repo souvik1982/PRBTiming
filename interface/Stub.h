@@ -3,7 +3,11 @@
 class Stub
 {
   public:
-    int BX_;
-    // int modID_;
+  
+    Stub(int bx, int modID, int layer);
+    
+    int bx_;
+    int modID_;
     int layer_;
+    
 };

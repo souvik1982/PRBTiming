@@ -4,14 +4,14 @@ Index: 0
 ComponentType: CIC
 ComponentName: cicL0
 ModuleID: 0
-Parity: L
+Segment: L
 OutputConnections: (1, 0, 0)
 
 Index: 1
 ComponentType: CIC
 ComponentName: cicR0
 ModuleID: 0
-Parity: R
+Segment: R
 OutputConnections: (1, 0, 0)
 
 
