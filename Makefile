@@ -1,10 +1,13 @@
 ROOTFLAGS = $(shell root-config --cflags)
 ROOTLIBS  = $(shell root-config --libs)
 
-all: RootDictionary.o ComponentRelation.o Component.o Stub.o CIC.o PRBTiming.o
+all: PRBTiming
 
 clean:
 	rm *.o
+
+PRBTiming: RootDictionary.o ComponentRelation.o Component.o Stub.o CIC.o PRBTiming.o
+	c++ RootDictionary.o ComponentRelation.o Component.o Stub.o CIC.o PRBTiming.o -o PRBTiming $(ROOTFLAGS) $(ROOTLIBS)
 
 RootDictionary.o: RootDictionary.cc
 	c++ -c RootDictionary.cc -c $(ROOTFLAGS)

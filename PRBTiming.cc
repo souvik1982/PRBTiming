@@ -45,10 +45,9 @@ int main(int argc, char *argv[])
     
     if (s.find("Index")!=std::string::npos)
     {
-      int newIndex=atoi(argInLine(s, "Index").c_str());
-      if (map_componentRelations.find(index)!=map_componentRelations.end())
+      int index=atoi(argInLine(s, "Index").c_str());
+      if (map_componentRelations.find(index)==map_componentRelations.end())
       {
-        index=newIndex;
         getline(file, s);
         std::string componentType=argInLine(s, "ComponentType");
         
@@ -76,7 +75,7 @@ int main(int argc, char *argv[])
       }
       else
       {
-        std::cout<<"WARNING: Index of this component "<<newIndex<<" already exists."<<std::endl;
+        std::cout<<"WARNING: Index of this component "<<index<<" already exists."<<std::endl;
       }
     } // Found new Index
   } // Done reading Schematic
