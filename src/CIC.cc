@@ -1,7 +1,11 @@
 #include "../interface/CIC.h"
 
-CIC::CIC(double f)
+CIC::CIC(std::string name, int moduleID, std::string segment, double f)
 {
+  type_="CIC";
+  name_=name;
+  moduleID_=moduleID;
+  segment_=segment;
   f_=f;
 }
 

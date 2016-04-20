@@ -5,6 +5,7 @@ ComponentType: CIC
 ComponentName: cicL0
 ModuleID: 0
 Segment: L
+Frequency: 250 MHz
 OutputConnections: (1, 0, 0)
 
 Index: 1
@@ -12,37 +13,44 @@ ComponentType: CIC
 ComponentName: cicR0
 ModuleID: 0
 Segment: R
+Frequency: 250 MHz
 OutputConnections: (1, 0, 0)
 
 
 Index: 2
 ComponentType: Receiver
 ComponentName: rxL_0
+Frequency: 250 MHz
 OutputConnections: (4, 0, 0)
 
 Index: 3
 ComponentType: Receiver
 ComponentName: rxR_0
+Frequency: 250 MHz
 OutputConnections: (5, 0, 0)
 
 
 Index: 4
 ComponentType: BXSplitter
 ComponentName: bxSplitterL_0
+Frequency: 250 MHz
 OutputConnections: 
 
 Index: 5
 ComponentType: BXSplitter
 ComponentName: bxSplitterR_0
+Frequency: 250 MHz
 OutputConnections:
 
 
 Index: 6
 ComponentType: LayerSplitter
 ComponentName: layerSplitter1_0
+Frequency: 250 MHz
 OutputConnections:
 
 Index: 7
 ComponentType: LayerSplitter
 ComponentName: layerSplitter2_0
+Frequency: 250 MHz
 OutputConnections:

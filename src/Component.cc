@@ -28,11 +28,6 @@ void Component::set_t2in(unsigned int i_in, double value)
   }
 }
 
-void Component::setEventCharacteristics(EventCharacteristics event)
-{
-  event_=event;
-}
-
 double Component::get_t1out(unsigned int i_out)
 {
   if (i_out<t1out_.size())
@@ -57,11 +52,6 @@ double Component::get_t2out(unsigned int i_out)
     std::cout<<"ERROR: Component "<<name_<<" has no output #"<<i_out<<std::endl;
     return -99;
   }
-}
-
-EventCharacteristics* Component::getEventCharacteristics()
-{
-  return &event_;
 }
 
 std::string Component::get_type()
