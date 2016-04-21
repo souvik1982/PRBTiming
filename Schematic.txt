@@ -6,12 +6,14 @@ Index: 2
 ComponentType: Receiver
 ComponentName: rxL_0
 Frequency: 250 MHz
+DelayCLK: 5
 OutputConnections: (4, 0, 0)
 
 Index: 3
 ComponentType: Receiver
 ComponentName: rxR_0
 Frequency: 250 MHz
+DelayCLK: 5
 OutputConnections: (5, 0, 0)
 
 

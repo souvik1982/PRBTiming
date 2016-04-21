@@ -1,8 +1,6 @@
 #include "string"
 #include "map"
 
-#include "../interface/ComponentRelation.h"
-
 std::string argInLine(std::string line, std::string key)
 {
   removeSpaces(line);
@@ -67,11 +65,11 @@ void readConfigurationFile(std::string schematicFilename, MapComponentRelations 
         
         if (componentType=="CIC")
         {
-          std::map<std::string, std::string> map_CIC=readConfigurationLine(&file, s);
-          std::string name_s;  if (map_CIC.find("ComponentName")!=map_CIC.end()) name_s=map_CIC["ComponentName"]; else std::cout<<"ERROR: CIC ComponentName does not exist in configuration file"<<std::endl;
-          int moduleID;        if (map_CIC.find("ModuleID")!=map_CIC.end()) moduleID=atoi(map_CIC["ModuleID"].c_str()); else std::cout<<"ERROR: CIC ModuleID does not exist in configuration file"<<std::endl;
-          std::string segment; if (map_CIC.find("Segment")!=map_CIC.end()) segment=map_CIC["Segment"]; else std::cout<<"ERROR: CIC Segment does not exist in configuration file"<<std::endl;
-          double frequency;    if (map_CIC.find("Frequency")!=map_CIC.end()) frequency=atof(map_CIC["Frequency"].c_str()); else std::cout<<"ERROR: CIC Frequency does not exist in configuration file"<<std::endl;
+          std::map<std::string, std::string> map_params=readConfigurationLine(&file, s);
+          std::string name_s;  if (map_params.find("ComponentName")!=map_params.end()) name_s=map_params["ComponentName"]; else std::cout<<"ERROR: CIC ComponentName does not exist in configuration file"<<std::endl;
+          int moduleID;        if (map_params.find("ModuleID")!=map_params.end()) moduleID=atoi(map_params["ModuleID"].c_str()); else std::cout<<"ERROR: CIC ModuleID does not exist in configuration file"<<std::endl;
+          std::string segment; if (map_params.find("Segment")!=map_params.end()) segment=map_params["Segment"]; else std::cout<<"ERROR: CIC Segment does not exist in configuration file"<<std::endl;
+          double frequency;    if (map_params.find("Frequency")!=map_params.end()) frequency=atof(map_params["Frequency"].c_str()); else std::cout<<"ERROR: CIC Frequency does not exist in configuration file"<<std::endl;
           CIC *cic=new CIC(name_s, moduleID, segment, frequency);
           ComponentRelation *compRelation=new ComponentRelation();
           while (s!="")
@@ -83,6 +81,25 @@ void readConfigurationFile(std::string schematicFilename, MapComponentRelations 
           compRelation->comp_=cic;
           (*map_componentRelations)[index]=compRelation;
         }
+        
+        if (componentType=="Receiver")
+        {
+          std::map<std::string, std::string> map_params=readConfigurationLine(&file, s);
+          std::string name_s;  if (map_params.find("ComponentName")!=map_params.end()) name_s=map_params["ComponentName"]; else std::cout<<"ERROR: CIC ComponentName does not exist in configuration file"<<std::endl;
+          double frequency;    if (map_params.find("Frequency")!=map_params.end()) frequency=atof(map_params["Frequency"].c_str()); else std::cout<<"ERROR: CIC Frequency does not exist in configuration file"<<std::endl;
+          double delayCLK;     if (map_params.find("DelayCLK")!=map_params.end()) delayCLK=atof(map_params["DelayCLK"].c_str()); else std::cout<<"ERROR: CIC DelayCLK does not exist in configuration file"<<std::endl;
+          Receiver *receiver=new Receiver(name_s, frequency, delayCLK);
+          ComponentRelation *compRelation=new ComponentRelation();
+          while (s!="")
+          {
+            std::string outputConnections=argInLine(s, "OutputConnections");
+            compRelation->extractComponentRelation(outputConnections);
+            getline(file, s);
+          }
+          compRelation->comp_=receiver;
+          (*map_componentRelations)[index]=compRelation;
+        }
+        
         
       }
       else

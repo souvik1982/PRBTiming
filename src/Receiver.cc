@@ -21,4 +21,13 @@ void Receiver::fillInputData(int link, std::vector<Stub*> data_PRBF0)
     data_PRBF_RX_.at(link/5).push_back(data_PRBF0.at(i));
   }
 }
+
+bool Receiver::computeOutputTimes()
+{
+  return true;
+}
+
+void Receiver::writeHistograms()
+{
+}
       

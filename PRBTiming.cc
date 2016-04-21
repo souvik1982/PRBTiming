@@ -10,6 +10,7 @@
 #include "interface/ComponentRelation.h"
 #include "interface/Stub.h"
 #include "interface/CIC.h"
+#include "interface/Receiver.h"
 #include "interface/loader.h"
 
 #include "src/CommandLineArguments.cc"
