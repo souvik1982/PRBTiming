@@ -24,5 +24,5 @@ Stub.o: src/Stub.cc
 CIC.o: src/CIC.cc
 	c++ -c src/CIC.cc -c $(ROOTFLAGS)
 
-PRBTiming.o: PRBTiming.cc
+PRBTiming.o: PRBTiming.cc src/ReadConfigurationFile.cc
 	c++ -c PRBTiming.cc -c $(ROOTFLAGS) 

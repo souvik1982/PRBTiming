@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
   if (cmdMap.find("-inputFile")!=cmdMap.end()) inputFile=cmdMap["-inputFile"];
   
   // Read the schematic file recursively
-  MapComponentRelations *map_componentRelations;
+  MapComponentRelations *map_componentRelations=new MapComponentRelations;
   readConfigurationFile(schematicFilename, map_componentRelations);
   
   /*

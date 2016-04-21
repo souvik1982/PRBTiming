@@ -1,21 +1,6 @@
 # Simplest PRB configuration
 
-Index: 0
-ComponentType: CIC
-ComponentName: cicL0
-ModuleID: 0
-Segment: L
-Frequency: 250 MHz
-OutputConnections: (1, 0, 0)
-
-Index: 1
-ComponentType: CIC
-ComponentName: cicR0
-ModuleID: 0
-Segment: R
-Frequency: 250 MHz
-OutputConnections: (1, 0, 0)
-
+Import: Schematic_CablingMap.txt
 
 Index: 2
 ComponentType: Receiver
