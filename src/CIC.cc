@@ -2,15 +2,15 @@
 
 #include "../interface/CIC.h"
 
-CIC::CIC(std::string name, int moduleID, std::string segment, double f)
+CIC::CIC(std::string name, int moduleID, std::string segment, double frequency)
 {
   type_="CIC";
   name_=name;
   moduleID_=moduleID;
   segment_=segment;
-  f_=f;
+  frequency_=frequency;
   
-  std::cout<<"LOG: Initialized CIC "<<name_<<" with moduleID = "<<moduleID_<<", segment = "<<segment_<<", operating frequency = "<<f_<<std::endl;
+  std::cout<<"LOG: Initialized CIC "<<name_<<" with moduleID = "<<moduleID_<<", segment = "<<segment_<<", operating frequency = "<<frequency_<<std::endl;
 }
 
 void CIC::fillInputData(int bx, int modID, int layer)

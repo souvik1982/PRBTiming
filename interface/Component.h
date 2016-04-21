@@ -34,6 +34,7 @@ class Component
     std::vector<double> t2out_;
     std::string type_;
     std::string name_;
+    double frequency_;
     std::vector<TH1F*> v_h_t1out_;
     std::vector<TH1F*> v_h_t2out_;
 };
