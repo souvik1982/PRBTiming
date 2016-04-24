@@ -100,7 +100,39 @@ void readConfigurationFile(std::string schematicFilename, MapComponentRelations 
           (*map_componentRelations)[index]=compRelation;
         }
         
+        if (componentType=="BXSplitter")
+        {
+          std::map<std::string, std::string> map_params=readConfigurationLine(&file, s);
+          std::string name_s;  if (map_params.find("ComponentName")!=map_params.end()) name_s=map_params["ComponentName"]; else std::cout<<"ERROR: CIC ComponentName does not exist in configuration file"<<std::endl;
+          double frequency;    if (map_params.find("Frequency")!=map_params.end()) frequency=atof(map_params["Frequency"].c_str()); else std::cout<<"ERROR: CIC Frequency does not exist in configuration file"<<std::endl;
+          BXSplitter *bxSplitter=new BXSplitter(name_s, frequency);
+          ComponentRelation *compRelation=new ComponentRelation();
+          while (s!="")
+          {
+            std::string outputConnections=argInLine(s, "OutputConnections");
+            compRelation->extractComponentRelation(outputConnections);
+            getline(file, s);
+          }
+          compRelation->comp_=bxSplitter;
+          (*map_componentRelations)[index]=compRelation;
+        }
         
+        if (componentType=="LayerSplitter")
+        {
+          std::map<std::string, std::string> map_params=readConfigurationLine(&file, s);
+          std::string name_s;  if (map_params.find("ComponentName")!=map_params.end()) name_s=map_params["ComponentName"]; else std::cout<<"ERROR: CIC ComponentName does not exist in configuration file"<<std::endl;
+          double frequency;    if (map_params.find("Frequency")!=map_params.end()) frequency=atof(map_params["Frequency"].c_str()); else std::cout<<"ERROR: CIC Frequency does not exist in configuration file"<<std::endl;
+          LayerSplitter *layerSplitter=new LayerSplitter(name_s, frequency);
+          ComponentRelation *compRelation=new ComponentRelation();
+          while (s!="")
+          {
+            std::string outputConnections=argInLine(s, "OutputConnections");
+            compRelation->extractComponentRelation(outputConnections);
+            getline(file, s);
+          }
+          compRelation->comp_=layerSplitter;
+          (*map_componentRelations)[index]=compRelation;
+        }
         
         
       }

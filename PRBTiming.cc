@@ -11,6 +11,8 @@
 #include "interface/Stub.h"
 #include "interface/CIC.h"
 #include "interface/Receiver.h"
+#include "interface/BXSplitter.h"
+#include "interface/LayerSplitter.h"
 #include "interface/loader.h"
 
 #include "src/CommandLineArguments.cc"
