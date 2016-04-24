@@ -6,8 +6,8 @@ all: PRBTiming
 clean:
 	rm *.o
 
-PRBTiming: RootDictionary.o ComponentRelation.o Component.o Stub.o CIC.o Receiver.o BXSplitter.o PRBTiming.o
-	c++ RootDictionary.o ComponentRelation.o Component.o Stub.o CIC.o Receiver.o BXSplitter.o PRBTiming.o -o PRBTiming $(ROOTFLAGS) $(ROOTLIBS)
+PRBTiming: RootDictionary.o ComponentRelation.o Component.o Stub.o CIC.o Receiver.o BXSplitter.o LayerSplitter.o PRBTiming.o
+	c++ RootDictionary.o ComponentRelation.o Component.o Stub.o CIC.o Receiver.o BXSplitter.o LayerSplitter.o PRBTiming.o -o PRBTiming $(ROOTFLAGS) $(ROOTLIBS)
 
 RootDictionary.o: RootDictionary.cc
 	c++ -c RootDictionary.cc -c $(ROOTFLAGS)
@@ -29,6 +29,9 @@ Receiver.o: src/Receiver.cc src/Component.cc
 
 BXSplitter.o: src/BXSplitter.cc src/Component.cc
 	c++ -c src/BXSplitter.cc -c $(ROOTFLAGS)
+        
+LayerSplitter.o: src/LayerSplitter.cc src/Component.cc
+	c++ -c src/LayerSplitter.cc -c $(ROOTFLAGS)
 
 PRBTiming.o: PRBTiming.cc src/ReadConfigurationFile.cc
 	c++ -c PRBTiming.cc -c $(ROOTFLAGS) 
