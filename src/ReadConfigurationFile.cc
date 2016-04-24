@@ -101,6 +101,8 @@ void readConfigurationFile(std::string schematicFilename, MapComponentRelations 
         }
         
         
+        
+        
       }
       else
       {

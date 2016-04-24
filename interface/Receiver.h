@@ -1,7 +1,7 @@
 #include <vector>
 
 #include "Stub.h"
-#include "../interface/Component.h"
+#include "Component.h"
 
 class Receiver: public Component
 {
@@ -11,7 +11,7 @@ class Receiver: public Component
     bool computeOutputTimes();
     void writeHistograms();
     
-    std::vector<std::vector<Stub*> > data_PRBF_RX_;
+    std::vector<std::vector<Stub*> > data_PRBF_RX_; // This should be 8 lines with 60 entries each. Should have a checking function.
     double delayCLK_;
 };    
       

@@ -30,4 +30,3 @@ bool Receiver::computeOutputTimes()
 void Receiver::writeHistograms()
 {
 }
-      
