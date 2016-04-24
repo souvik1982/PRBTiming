@@ -36,7 +36,9 @@ std::map<std::string, std::string> readConfigurationLine(std::ifstream *file, st
   return configMap;
 }
 
-void readConfigurationFile(std::string schematicFilename, MapComponentRelations *map_componentRelations)
+typedef std::map<int, CIC*> MapModuleIDCIC;
+
+void readConfigurationFile(std::string schematicFilename, MapComponentRelations *map_componentRelations, MapModuleIDCIC *map_modId_CIC)
 {
   std::cout<<"schematicFilename = "<<schematicFilename<<std::endl;
   std::ifstream file(schematicFilename.c_str());
@@ -53,7 +55,7 @@ void readConfigurationFile(std::string schematicFilename, MapComponentRelations 
     if (s.find("Import")!=std::string::npos) // Go into this schematic
     {
       std::string subSchematicFilename=argInLine(s, "Import");
-      readConfigurationFile(subSchematicFilename, map_componentRelations);
+      readConfigurationFile(subSchematicFilename, map_componentRelations, map_modId_CIC);
     }
     else if (s.find("Index")!=std::string::npos)
     {
@@ -80,6 +82,7 @@ void readConfigurationFile(std::string schematicFilename, MapComponentRelations 
           }
           compRelation->comp_=cic;
           (*map_componentRelations)[index]=compRelation;
+          (*map_modId_CIC)[moduleID]=cic;
         }
         
         if (componentType=="Receiver")

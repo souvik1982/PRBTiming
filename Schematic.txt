@@ -2,14 +2,14 @@
 
 Import: Schematic_CablingMap.txt
 
-Index: 2
+Index: 10000
 ComponentType: Receiver
 ComponentName: rxL_0
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (4, 0, 0)
 
-Index: 3
+Index: 10001
 ComponentType: Receiver
 ComponentName: rxR_0
 Frequency: 250 MHz
@@ -17,26 +17,26 @@ DelayCLK: 5
 OutputConnections: (5, 0, 0)
 
 
-Index: 4
+Index: 20000
 ComponentType: BXSplitter
 ComponentName: bxSplitterL_0
 Frequency: 250 MHz
 OutputConnections: 
 
-Index: 5
+Index: 20001
 ComponentType: BXSplitter
 ComponentName: bxSplitterR_0
 Frequency: 250 MHz
 OutputConnections:
 
 
-Index: 6
+Index: 30000
 ComponentType: LayerSplitter
 ComponentName: layerSplitter1_0
 Frequency: 250 MHz
 OutputConnections:
 
-Index: 7
+Index: 30001
 ComponentType: LayerSplitter
 ComponentName: layerSplitter2_0
 Frequency: 250 MHz

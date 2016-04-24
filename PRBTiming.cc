@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 {
   std::string schematicFilename="Schematic.txt";
   std::string inputDir;
-  std::string inputFile="stubs.root";
+  std::string inputFile="tracks.root";
   
   // Get command line arguments
   std::map<std::string, std::string> cmdMap=commandLineArguments(argc, argv);
@@ -32,9 +32,9 @@ int main(int argc, char *argv[])
   
   // Read the schematic file recursively
   MapComponentRelations *map_componentRelations=new MapComponentRelations;
-  readConfigurationFile(schematicFilename, map_componentRelations);
+  MapModuleIDCIC *map_modId_CIC=new MapModuleIDCIC;
+  readConfigurationFile(schematicFilename, map_componentRelations, map_modId_CIC);
   
-  /*
   // Read ROOT event files and iterate
   TFile *eventFile=new TFile((inputDir+"/"+inputFile).c_str());
   TTree *tree=(TTree*)eventFile->Get("ntupler/tree");
@@ -52,9 +52,23 @@ int main(int argc, char *argv[])
     {
       unsigned int j_event=i_event+i_BX;
       tree->GetEntry(j_event);
+      
+      for (unsigned int i_stub=0; i_stub<stubs_modId->size(); ++i_stub)
+      {
+        float stub_modId=stubs_modId->at(i_stub);
+        if (map_modId_CIC->find(stub_modId)!=map_modId_CIC->end())
+        {
+          (*map_modId_CIC)[stub_modId]->fillInputData(i_BX, stub_modId, 0);
+          std::cout<<"Found a represented module "<<stub_modId<<" and filled it with Stub BX = "<<i_BX<<std::endl;
+        }
+        else
+        {
+          // std::cout<<"WARNING: ModuleID = "<<stub_modId<<" appears in the stub data but does not exist in the Schematic."<<std::endl;
+        }
+      }
     }
   }
-  */
+  
     
   
 }
