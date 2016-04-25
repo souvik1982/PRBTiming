@@ -37,7 +37,6 @@ bool BXSplitter::computeOutputTimes()
 {
   if (frequency_>0)
   {
-    
     double maxtin=-999;
     for (unsigned int i_link=0; i_link<8; ++i_link)
     {
