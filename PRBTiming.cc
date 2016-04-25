@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
           }
         }
       }
-    } // First do the CICs
+    }
     
     // Then do the Receivers
     for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
@@ -131,8 +131,9 @@ int main(int argc, char *argv[])
         {
           std::cout<<"ERROR: Receiver "<<receiver->get_name()<<" is connected to Component with index "<<targetIndex<<" that does not exist in Schematic."<<std::endl;
         }
+        receiver->computeOutputTimes();
       }
-    } // Then do the Receivers
+    }
     
     // Then do the BXSplitters
     for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
@@ -163,8 +164,9 @@ int main(int argc, char *argv[])
             std::cout<<"ERROR: BXSplitter "<<bxSplitter->get_name()<<" is connected to Component with index "<<targetIndex<<" that does not exist in Schematic."<<std::endl;
           }
         }
+        bxSplitter->computeOutputTimes();
       }
-    } // Then do the BXSplitters
+    }
     
     
     // Now compute output times

@@ -38,8 +38,8 @@ bool Receiver::computeOutputTimes()
 {
   for (unsigned int i=0; i<8; ++i)
   {
-    t1out_.at(i)=(1.+delayCLK_+1.)/frequency_*1000.;
-    t2out_.at(i)=(64.+delayCLK_+60.)/frequency_*1000.;
+    t1out_.at(i)=(delayCLK_+1.)/frequency_*1000.;
+    t2out_.at(i)=(delayCLK_+1.+60.)/frequency_*1000.; // FIX
   }
   return true;
 }
