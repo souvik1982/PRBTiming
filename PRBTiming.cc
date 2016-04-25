@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
       }
     }
     
-    // Propagate data down the chain
+    // Propagate data and timing down the chain
     
     // First do the CICs
     for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
@@ -118,14 +118,22 @@ int main(int argc, char *argv[])
         // Compute timing for receiver and propagate t1out and t2out into inputs for BXSplitter
         receiver->computeOutputTimes();
         
-        // Distribute data to BXSplitter
+        // Distribute data, and t1in and t2in to BXSplitter
         int targetIndex=componentRelation->i_comp_.at(0);
         if (map_componentRelations->find(targetIndex)!=map_componentRelations->end())
         {
           if ((*map_componentRelations)[targetIndex]->comp_->get_type()=="BXSplitter")
           {
+            // Distribute data
             BXSplitter *bxSplitter=(BXSplitter*)((*map_componentRelations)[targetIndex]->comp_);
             bxSplitter->fillInputData(receiver->data_PRBF_RX_);
+            
+            // Update t1in and t2in
+            for (unsigned int i_pin=0; i_pin<componentRelation->i_comp_.size(); ++i_pin)
+            {
+              bxSplitter->set_t1in(componentRelation->i_input_.at(i_pin), receiver->get_t1out(componentRelation->i_output_.at(i_pin)));
+              bxSplitter->set_t2in(componentRelation->i_input_.at(i_pin), receiver->get_t2out(componentRelation->i_output_.at(i_pin)));
+            }
           }
           else
           {
@@ -150,10 +158,10 @@ int main(int argc, char *argv[])
       {
         BXSplitter *bxSplitter=(BXSplitter*)component;
         
-        // Compute timing for bxSplitter and propagate t1out and t2out into inputs for LayerSplitter
+        // Compute timing for bxSplitter
         bxSplitter->computeOutputTimes();
         
-        // Distribute data to LayerSplitter
+        // Distribute data, and t1in and t2in to LayerSplitter
         for (unsigned int i_pin=0; i_pin<componentRelation->i_comp_.size(); ++i_pin)
         {
           int targetIndex=componentRelation->i_comp_.at(i_pin);
@@ -161,8 +169,13 @@ int main(int argc, char *argv[])
           {
             if ((*map_componentRelations)[targetIndex]->comp_->get_type()=="LayerSplitter")
             {
+              // Distribute data
               LayerSplitter *layerSplitter=(LayerSplitter*)((*map_componentRelations)[targetIndex]->comp_);
               layerSplitter->fillInputData(componentRelation->i_input_.at(i_pin), bxSplitter->data_PRBF1_);
+              
+              // Update the t1in and t2in 
+              layerSplitter->set_t1in(componentRelation->i_input_.at(i_pin), bxSplitter->get_t1out(componentRelation->i_output_.at(i_pin)));
+              layerSplitter->set_t2in(componentRelation->i_input_.at(i_pin), bxSplitter->get_t2out(componentRelation->i_output_.at(i_pin)));
             }
             else
             {
