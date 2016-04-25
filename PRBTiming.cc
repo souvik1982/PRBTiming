@@ -114,6 +114,11 @@ int main(int argc, char *argv[])
       if (component->get_type()=="Receiver")
       {
         Receiver *receiver=(Receiver*)component;
+        
+        // Compute timing for receiver and propagate t1out and t2out into inputs for BXSplitter
+        receiver->computeOutputTimes();
+        
+        // Distribute data to BXSplitter
         int targetIndex=componentRelation->i_comp_.at(0);
         if (map_componentRelations->find(targetIndex)!=map_componentRelations->end())
         {
@@ -131,7 +136,7 @@ int main(int argc, char *argv[])
         {
           std::cout<<"ERROR: Receiver "<<receiver->get_name()<<" is connected to Component with index "<<targetIndex<<" that does not exist in Schematic."<<std::endl;
         }
-        receiver->computeOutputTimes();
+        
       }
     }
     
@@ -144,6 +149,11 @@ int main(int argc, char *argv[])
       if (component->get_type()=="BXSplitter")
       {
         BXSplitter *bxSplitter=(BXSplitter*)component;
+        
+        // Compute timing for bxSplitter and propagate t1out and t2out into inputs for LayerSplitter
+        bxSplitter->computeOutputTimes();
+        
+        // Distribute data to LayerSplitter
         for (unsigned int i_pin=0; i_pin<componentRelation->i_comp_.size(); ++i_pin)
         {
           int targetIndex=componentRelation->i_comp_.at(i_pin);
@@ -164,14 +174,24 @@ int main(int argc, char *argv[])
             std::cout<<"ERROR: BXSplitter "<<bxSplitter->get_name()<<" is connected to Component with index "<<targetIndex<<" that does not exist in Schematic."<<std::endl;
           }
         }
-        bxSplitter->computeOutputTimes();
+        
       }
     }
     
-    
-    // Now compute output times
-    
-    
+    // Then do the LayerSplitters
+    for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
+    {
+      ComponentRelation *componentRelation=i_comp->second;
+      Component *component=componentRelation->comp_;
+      
+      if (component->get_type()=="LayerSplitter")
+      {
+        LayerSplitter *layerSplitter=(LayerSplitter*)component;
+        
+        // Compute timing for layerSplitter
+        layerSplitter->computeOutputTimes();
+      }
+    }
       
     
   } // Event loop
