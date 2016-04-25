@@ -10,6 +10,11 @@ CIC::CIC(std::string name, int moduleID, std::string segment, double frequency)
   segment_=segment;
   frequency_=frequency;
   
+  t1in_.push_back(0);
+  t2in_.push_back(0);
+  t1out_.push_back(1./frequency*1000.);
+  t2out_.push_back(64./frequency*1000.);
+  
   std::cout<<"LOG: Initialized CIC "<<name_<<" with moduleID = "<<moduleID_<<", segment = "<<segment_<<", operating frequency = "<<frequency_<<std::endl;
 }
 

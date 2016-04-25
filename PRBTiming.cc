@@ -58,8 +58,11 @@ int main(int argc, char *argv[])
         float stub_modId=stubs_modId->at(i_stub);
         if (map_modId_CIC->find(stub_modId)!=map_modId_CIC->end())
         {
-          (*map_modId_CIC)[stub_modId]->fillInputData(i_BX, stub_modId, 0);
-          std::cout<<"Found a represented module "<<stub_modId<<" and filled it with Stub BX = "<<i_BX<<std::endl;
+          CIC *cic=(*map_modId_CIC)[stub_modId];
+          int layer=int(stub_modId/10000);
+          cic->fillInputData(i_BX, stub_modId, layer);
+          std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
+          
         }
         else
         {
@@ -67,7 +70,109 @@ int main(int argc, char *argv[])
         }
       }
     }
-  }
+    
+    // Propagate data down the chain
+    
+    // First do the CICs
+    for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
+    {
+      ComponentRelation *componentRelation=i_comp->second;
+      Component *component=componentRelation->comp_;
+      
+      if (component->get_type()=="CIC")
+      {
+        CIC *cic=(CIC*)component;
+        for (unsigned int i_pin=0; i_pin<componentRelation->i_comp_.size(); ++i_pin)
+        {
+          int targetIndex=componentRelation->i_comp_.at(i_pin);
+          if (map_componentRelations->find(targetIndex)!=map_componentRelations->end())
+          {
+            if ((*map_componentRelations)[targetIndex]->comp_->get_type()=="Receiver")
+            {
+              Receiver *receiver=(Receiver*)((*map_componentRelations)[targetIndex]->comp_);
+              receiver->fillInputData(componentRelation->i_input_.at(i_pin), cic->data_PRBF0_);
+            }
+            else
+            {
+              std::cout<<"ERROR: CIC "<<cic->get_name()<<" is not connected to a Receiver."<<std::endl;
+            }
+          }
+          else
+          {
+            std::cout<<"ERROR: CIC "<<cic->get_name()<<" is connected to Component with index "<<targetIndex<<" that does not exist in Schematic."<<std::endl;
+          }
+        }
+      }
+    } // First do the CICs
+    
+    // Then do the Receivers
+    for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
+    {
+      ComponentRelation *componentRelation=i_comp->second;
+      Component *component=componentRelation->comp_;
+      
+      if (component->get_type()=="Receiver")
+      {
+        Receiver *receiver=(Receiver*)component;
+        int targetIndex=componentRelation->i_comp_.at(0);
+        if (map_componentRelations->find(targetIndex)!=map_componentRelations->end())
+        {
+          if ((*map_componentRelations)[targetIndex]->comp_->get_type()=="BXSplitter")
+          {
+            BXSplitter *bxSplitter=(BXSplitter*)((*map_componentRelations)[targetIndex]->comp_);
+            bxSplitter->fillInputData(receiver->data_PRBF_RX_);
+          }
+          else
+          {
+            std::cout<<"ERROR: Receiver "<<receiver->get_name()<<" is not connected to a BXSplitter."<<std::endl;
+          }
+        }
+        else
+        {
+          std::cout<<"ERROR: Receiver "<<receiver->get_name()<<" is connected to Component with index "<<targetIndex<<" that does not exist in Schematic."<<std::endl;
+        }
+      }
+    } // Then do the Receivers
+    
+    // Then do the BXSplitters
+    for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
+    {
+      ComponentRelation *componentRelation=i_comp->second;
+      Component *component=componentRelation->comp_;
+      
+      if (component->get_type()=="BXSplitter")
+      {
+        BXSplitter *bxSplitter=(BXSplitter*)component;
+        for (unsigned int i_pin=0; i_pin<componentRelation->i_comp_.size(); ++i_pin)
+        {
+          int targetIndex=componentRelation->i_comp_.at(i_pin);
+          if (map_componentRelations->find(targetIndex)!=map_componentRelations->end())
+          {
+            if ((*map_componentRelations)[targetIndex]->comp_->get_type()=="LayerSplitter")
+            {
+              LayerSplitter *layerSplitter=(LayerSplitter*)((*map_componentRelations)[targetIndex]->comp_);
+              layerSplitter->fillInputData(componentRelation->i_input_.at(i_pin), bxSplitter->data_PRBF1_);
+            }
+            else
+            {
+              std::cout<<"ERROR: BXSplitter "<<bxSplitter->get_name()<<" is not connected to a LayerSplitter."<<std::endl;
+            }
+          }
+          else
+          {
+            std::cout<<"ERROR: BXSplitter "<<bxSplitter->get_name()<<" is connected to Component with index "<<targetIndex<<" that does not exist in Schematic."<<std::endl;
+          }
+        }
+      }
+    } // Then do the BXSplitters
+    
+    
+    // Now compute output times
+    
+    
+      
+    
+  } // Event loop
   
     
   

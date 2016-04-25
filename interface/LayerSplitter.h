@@ -7,7 +7,7 @@ class LayerSplitter: public Component
 {
   public:
     LayerSplitter(std::string name, double frequency);
-    void fillInputData(std::vector<std::vector<Stub*> > data_PRBF1);
+    void fillInputData(int bXoutputPin, std::vector<std::vector<Stub*> > data_PRBF1);
     bool computeOutputTimes();
     void writeHistograms();
     
