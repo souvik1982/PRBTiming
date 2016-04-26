@@ -141,8 +141,6 @@ bool LayerSplitter::computeOutputTimes()
     std::cout<<"ERROR: LayerSplitter "<<name_<<" has no operational frequency set."<<std::endl;
   }
   
-  
-  
   return true;
 }
 

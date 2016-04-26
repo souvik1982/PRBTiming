@@ -19,11 +19,11 @@ class Component
     std::string get_type();
     std::string get_name();
     void printOutputTimes();
+    void writeHistograms();
     
     void clearValues();
     
     virtual bool computeOutputTimes() = 0;
-    virtual void writeHistograms() = 0;
   
   protected:
     int nInputs_;

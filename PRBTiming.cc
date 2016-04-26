@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
           CIC *cic=(*map_modId_CIC)[stub_modId];
           int layer=int(stub_modId/10000);
           cic->fillInputData(i_BX, stub_modId, layer);
-          std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
+          // std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
           
         }
         else
@@ -211,9 +211,16 @@ int main(int argc, char *argv[])
       }
     }
       
+    if (i_event%100==0) std::cout<<"Events "<<i_event<<" out of "<<nEvents<<" have been processed."<<std::endl;
     
   } // Event loop
   
+  
+  // Write component histograms to file
+  for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
+  {
+    i_comp->second->comp_->writeHistograms();
+  }
     
   
 }

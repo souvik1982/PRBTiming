@@ -78,8 +78,7 @@ void Component::printOutputTimes()
   std::cout<<" === === "<<std::endl;
 }
 
-/*
-void Component::writeOutputTimes()
+void Component::writeHistograms()
 {
   TFile *file=new TFile((name_+".root").c_str(), "recreate");
   for (unsigned int i=0; i<v_h_t1out_.size(); ++i)
@@ -92,7 +91,6 @@ void Component::writeOutputTimes()
   }
   file->Close();
 }
-*/
 
 void Component::clearValues()
 {

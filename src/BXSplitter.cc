@@ -14,6 +14,9 @@ BXSplitter::BXSplitter(std::string name, double frequency)
     t2in_.push_back(-999); // by link
     t1out_.push_back(-999); // by BX
     t2out_.push_back(-999); // by BX
+    
+    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t1out").c_str(), 1000, 0, 1000.));
+    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t2out").c_str(), 1000, 0, 1000.));
   }
   
   data_PRBF1_.resize(8);
@@ -55,6 +58,9 @@ bool BXSplitter::computeOutputTimes()
     {
       t1out_.at(i_BX)=maxtin;
       t2out_.at(i_BX)=maxtin+data_PRBF1_.at(i_BX).size()*frequency_/1000.;
+      
+      v_h_t1out_.at(i_BX)->Fill(t1out_.at(i_BX));
+      v_h_t2out_.at(i_BX)->Fill(t2out_.at(i_BX));
     }
   }
   else
