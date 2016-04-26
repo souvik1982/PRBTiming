@@ -600,7 +600,7 @@ OutputConnections: (10001, 0, 36)
 Index: 74
 ComponentType: CIC 
 ComponentName: cicL74
-ModuleID: 100820 100911 
+ModuleID: 100820 
 Segment: L 
 Frequency: 250 MHz 
 OutputConnections: (10000, 0, 37) 
@@ -608,7 +608,7 @@ OutputConnections: (10000, 0, 37)
 Index: 75
 ComponentType: CIC 
 ComponentName: cicR75
-ModuleID: 100820 100911 
+ModuleID: 100820 
 Segment: R 
 Frequency: 250 MHz 
 OutputConnections: (10001, 0, 37) 
@@ -616,7 +616,7 @@ OutputConnections: (10001, 0, 37)
 Index: 76
 ComponentType: CIC 
 ComponentName: cicL76
-ModuleID: 100912 100913 
+ModuleID: 100912 
 Segment: L 
 Frequency: 250 MHz 
 OutputConnections: (10000, 0, 38) 
@@ -624,7 +624,7 @@ OutputConnections: (10000, 0, 38)
 Index: 77
 ComponentType: CIC 
 ComponentName: cicR77
-ModuleID: 100912 100913 
+ModuleID: 100912 
 Segment: R 
 Frequency: 250 MHz 
 OutputConnections: (10001, 0, 38) 
@@ -632,7 +632,7 @@ OutputConnections: (10001, 0, 38)
 Index: 78
 ComponentType: CIC 
 ComponentName: cicL78
-ModuleID: 100914 100915
+ModuleID: 100914
 Segment: L 
 Frequency: 250 MHz 
 OutputConnections: (10000, 0, 39) 
@@ -640,7 +640,55 @@ OutputConnections: (10000, 0, 39)
 Index: 79
 ComponentType: CIC 
 ComponentName: cicR79
-ModuleID: 100914 100915
+ModuleID: 100914
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10001, 0, 39) 
+
+Index: 80
+ComponentType: CIC 
+ComponentName: cicL80
+ModuleID: 100911 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10000, 0, 37) 
+
+Index: 81
+ComponentType: CIC 
+ComponentName: cicR81
+ModuleID: 100911 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10001, 0, 37) 
+
+Index: 82
+ComponentType: CIC 
+ComponentName: cicL82
+ModuleID: 100913 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10000, 0, 38) 
+
+Index: 83
+ComponentType: CIC 
+ComponentName: cicR83
+ModuleID: 100913 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10001, 0, 38) 
+
+Index: 84
+ComponentType: CIC 
+ComponentName: cicL84
+ModuleID: 100915
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10000, 0, 39) 
+
+Index: 85
+ComponentType: CIC 
+ComponentName: cicR85
+ModuleID: 100915
 Segment: R 
 Frequency: 250 MHz 
 OutputConnections: (10001, 0, 39) 
