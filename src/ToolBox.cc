@@ -1,3 +1,5 @@
+#pragma once
+
 #include "TMath.h"
 #include "TRandom3.h"
 

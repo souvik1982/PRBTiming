@@ -48,6 +48,8 @@ int main(int argc, char *argv[])
   unsigned int nEvents=tree->GetEntries();
   for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
   {
+  
+    // Bunch 8 events into a train
     for (unsigned int i_BX=0; i_BX<8; ++i_BX)
     {
       unsigned int j_event=i_event+i_BX;
@@ -73,6 +75,7 @@ int main(int argc, char *argv[])
     
     // Propagate data and timing down the chain
     
+    // std::cout<<"Start with CIC"<<std::endl;
     // First do the CICs
     for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
     {
@@ -104,6 +107,7 @@ int main(int argc, char *argv[])
         }
       }
     }
+    // std::cout<<"End with CIC"<<std::endl;
     
     // Then do the Receivers
     for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
@@ -147,6 +151,7 @@ int main(int argc, char *argv[])
         
       }
     }
+    // std::cout<<"End with Receivers"<<std::endl;
     
     // Then do the BXSplitters
     for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)

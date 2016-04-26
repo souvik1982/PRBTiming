@@ -1,17 +1,87 @@
 # The cabling map
 
+# --- Left CICs ---
+
 Index: 0
 ComponentType: CIC
 ComponentName: cicL0
 ModuleID: 50000
 Segment: L
 Frequency: 250 MHz
-OutputConnections: (1, 0, 0)
+OutputConnections: (10000, 0, 0)
 
 Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50001
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 1)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50002
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 2)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50003
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 3)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50004
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 4)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50005
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 5)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50006
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 6)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50007
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 7)
+
+Index: 1
+ComponentType: CIC
+ComponentName: cicL0
+ModuleID: 50008
+Segment: L
+Frequency: 250 MHz
+OutputConnections: (10000, 0, 8)
+
+
+
+# --- Right CICs ---
+
+Index: 1000
 ComponentType: CIC
 ComponentName: cicR0
 ModuleID: 50000
 Segment: R
 Frequency: 250 MHz
-OutputConnections: (1, 0, 0)
+OutputConnections: (11000, 0, 0)

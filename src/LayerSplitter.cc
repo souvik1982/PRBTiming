@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ToolBox.cc"
 
 #include "../interface/LayerSplitter.h"
 
@@ -17,6 +18,9 @@ LayerSplitter::LayerSplitter(std::string name, double frequency)
   {
     t1out_.push_back(-999);
     t2out_.push_back(-999);
+    
+    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t1out").c_str(), 1000, 0, 1000.));
+    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t2out").c_str(), 1000, 0, 1000.));
   }
   
   data_PRBF2_.resize(6);
@@ -124,7 +128,13 @@ bool LayerSplitter::computeOutputTimes()
     t2out_.at(3)=mintin+(maxCLK_layer3+1)*frequency_/1000.;
     t2out_.at(4)=mintin+(maxCLK_layer4+1)*frequency_/1000.;
     t2out_.at(5)=mintin+(maxCLK_layer5+1)*frequency_/1000.;
-  
+    
+    // Fill histograms
+    for (unsigned int i_layer=0; i_layer<6; ++i_layer)
+    {
+      v_h_t1out_.at(i_layer)->Fill(t1out_.at(i_layer));
+      v_h_t2out_.at(i_layer)->Fill(t2out_.at(i_layer));
+    }
   }
   else
   {

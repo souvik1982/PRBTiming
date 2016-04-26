@@ -7,27 +7,27 @@ ComponentType: Receiver
 ComponentName: rxL_0
 Frequency: 250 MHz
 DelayCLK: 5
-OutputConnections: (4, 0, 0)
+OutputConnections: (20000, 0, 0) (20000, 1, 1) (20000, 2, 2) (20000, 3, 3) (20000, 4, 4) (20000, 5, 5) (20000, 6, 6) (20000, 7, 7)
 
-Index: 10001
+Index: 11000
 ComponentType: Receiver
 ComponentName: rxR_0
 Frequency: 250 MHz
 DelayCLK: 5
-OutputConnections: (5, 0, 0)
+OutputConnections: (21000, 0, 0) (21000, 1, 1) (21000, 2, 2) (21000, 3, 3) (21000, 4, 4) (21000, 5, 5) (21000, 6, 6) (21000, 7, 7)
 
 
 Index: 20000
 ComponentType: BXSplitter
 ComponentName: bxSplitterL_0
 Frequency: 250 MHz
-OutputConnections: 
+OutputConnections: (30000, 0, 0) (30000, 1, 1) (30000, 2, 2) (30000, 3, 3) (30000, 4, 4) (30000, 5, 5) (30000, 6, 6) (30000, 7, 7)
 
-Index: 20001
+Index: 21000
 ComponentType: BXSplitter
 ComponentName: bxSplitterR_0
 Frequency: 250 MHz
-OutputConnections:
+OutputConnections: (31000, 0, 0) (31000, 1, 1) (31000, 2, 2) (31000, 3, 3) (31000, 4, 4) (31000, 5, 5) (31000, 6, 6) (31000, 7, 7)
 
 
 Index: 30000
@@ -36,7 +36,7 @@ ComponentName: layerSplitter1_0
 Frequency: 250 MHz
 OutputConnections:
 
-Index: 30001
+Index: 31000
 ComponentType: LayerSplitter
 ComponentName: layerSplitter2_0
 Frequency: 250 MHz

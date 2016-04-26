@@ -28,7 +28,7 @@ void BXSplitter::fillInputData(std::vector<std::vector<Stub*> > data_PRBF_RX)
     for (unsigned int i_Stub=0; i_Stub<data_PRBF_RX.at(i_link).size(); ++i_Stub)
     {
       Stub *stub=data_PRBF_RX.at(i_link).at(i_Stub);
-      data_PRBF1_.at(stub->bx_-1).push_back(stub); // If this fails, check bx
+      data_PRBF1_.at(stub->bx_).push_back(stub); // If this fails, check bx
     }
   }
 }
