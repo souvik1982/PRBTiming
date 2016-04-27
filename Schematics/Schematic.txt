@@ -1,6 +1,6 @@
 # Simplest PRB configuration
 
-Import: Schematic_CablingMap.txt
+Import: Schematic_CablingMap_PRB0.txt
 
 Index: 10000
 ComponentType: Receiver

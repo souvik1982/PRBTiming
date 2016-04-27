@@ -1,0 +1,695 @@
+# === Cabling Map from CICs to PRB8 === 
+# Author: Souvik Das 
+# Date: Apr 27, 2016
+# Built using createCablingMap.py 
+# and existing CIC --> PRB cabling maps 
+# ===================================== 
+ 
+Index: 8000
+ComponentType: CIC 
+ComponentName: cicL8000
+ModuleID: 50430 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 0) 
+
+Index: 8001
+ComponentType: CIC 
+ComponentName: cicR8001
+ModuleID: 50430 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 0) 
+
+Index: 8002
+ComponentType: CIC 
+ComponentName: cicL8002
+ModuleID: 50431 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 1) 
+
+Index: 8003
+ComponentType: CIC 
+ComponentName: cicR8003
+ModuleID: 50431 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 1) 
+
+Index: 8004
+ComponentType: CIC 
+ComponentName: cicL8004
+ModuleID: 50432
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 2) 
+
+Index: 8005
+ComponentType: CIC 
+ComponentName: cicR8005
+ModuleID: 50432
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 2) 
+
+Index: 8006
+ComponentType: CIC 
+ComponentName: cicL8006
+ModuleID: 60626 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 3) 
+
+Index: 8007
+ComponentType: CIC 
+ComponentName: cicR8007
+ModuleID: 60626 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 3) 
+
+Index: 8008
+ComponentType: CIC 
+ComponentName: cicL8008
+ModuleID: 60627 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 4) 
+
+Index: 8009
+ComponentType: CIC 
+ComponentName: cicR8009
+ModuleID: 60627 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 4) 
+
+Index: 8010
+ComponentType: CIC 
+ComponentName: cicL8010
+ModuleID: 60628 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 5) 
+
+Index: 8011
+ComponentType: CIC 
+ComponentName: cicR8011
+ModuleID: 60628 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 5) 
+
+Index: 8012
+ComponentType: CIC 
+ComponentName: cicL8012
+ModuleID: 60629
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 6) 
+
+Index: 8013
+ComponentType: CIC 
+ComponentName: cicR8013
+ModuleID: 60629
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 6) 
+
+Index: 8014
+ComponentType: CIC 
+ComponentName: cicL8014
+ModuleID: 70926 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 7) 
+
+Index: 8015
+ComponentType: CIC 
+ComponentName: cicR8015
+ModuleID: 70926 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 7) 
+
+Index: 8016
+ComponentType: CIC 
+ComponentName: cicL8016
+ModuleID: 70927 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 8) 
+
+Index: 8017
+ComponentType: CIC 
+ComponentName: cicR8017
+ModuleID: 70927 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 8) 
+
+Index: 8018
+ComponentType: CIC 
+ComponentName: cicL8018
+ModuleID: 70928 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 9) 
+
+Index: 8019
+ComponentType: CIC 
+ComponentName: cicR8019
+ModuleID: 70928 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 9) 
+
+Index: 8020
+ComponentType: CIC 
+ComponentName: cicL8020
+ModuleID: 70929 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 10) 
+
+Index: 8021
+ComponentType: CIC 
+ComponentName: cicR8021
+ModuleID: 70929 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 10) 
+
+Index: 8022
+ComponentType: CIC 
+ComponentName: cicL8022
+ModuleID: 70930 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 11) 
+
+Index: 8023
+ComponentType: CIC 
+ComponentName: cicR8023
+ModuleID: 70930 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 11) 
+
+Index: 8024
+ComponentType: CIC 
+ComponentName: cicL8024
+ModuleID: 70931
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 12) 
+
+Index: 8025
+ComponentType: CIC 
+ComponentName: cicR8025
+ModuleID: 70931
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 12) 
+
+Index: 8026
+ComponentType: CIC 
+ComponentName: cicL8026
+ModuleID: 81111 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 13) 
+
+Index: 8027
+ComponentType: CIC 
+ComponentName: cicR8027
+ModuleID: 81111 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 13) 
+
+Index: 8028
+ComponentType: CIC 
+ComponentName: cicL8028
+ModuleID: 81112 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 14) 
+
+Index: 8029
+ComponentType: CIC 
+ComponentName: cicR8029
+ModuleID: 81112 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 14) 
+
+Index: 8030
+ComponentType: CIC 
+ComponentName: cicL8030
+ModuleID: 81113 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 15) 
+
+Index: 8031
+ComponentType: CIC 
+ComponentName: cicR8031
+ModuleID: 81113 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 15) 
+
+Index: 8032
+ComponentType: CIC 
+ComponentName: cicL8032
+ModuleID: 81211 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 16) 
+
+Index: 8033
+ComponentType: CIC 
+ComponentName: cicR8033
+ModuleID: 81211 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 16) 
+
+Index: 8034
+ComponentType: CIC 
+ComponentName: cicL8034
+ModuleID: 81212 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 17) 
+
+Index: 8035
+ComponentType: CIC 
+ComponentName: cicR8035
+ModuleID: 81212 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 17) 
+
+Index: 8036
+ComponentType: CIC 
+ComponentName: cicL8036
+ModuleID: 81213
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 18) 
+
+Index: 8037
+ComponentType: CIC 
+ComponentName: cicR8037
+ModuleID: 81213
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 18) 
+
+Index: 8038
+ComponentType: CIC 
+ComponentName: cicL8038
+ModuleID: 91511 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 19) 
+
+Index: 8039
+ComponentType: CIC 
+ComponentName: cicR8039
+ModuleID: 91511 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 19) 
+
+Index: 8040
+ComponentType: CIC 
+ComponentName: cicL8040
+ModuleID: 91512 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 20) 
+
+Index: 8041
+ComponentType: CIC 
+ComponentName: cicR8041
+ModuleID: 91512 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 20) 
+
+Index: 8042
+ComponentType: CIC 
+ComponentName: cicL8042
+ModuleID: 91513 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 21) 
+
+Index: 8043
+ComponentType: CIC 
+ComponentName: cicR8043
+ModuleID: 91513 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 21) 
+
+Index: 8044
+ComponentType: CIC 
+ComponentName: cicL8044
+ModuleID: 91514 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 22) 
+
+Index: 8045
+ComponentType: CIC 
+ComponentName: cicR8045
+ModuleID: 91514 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 22) 
+
+Index: 8046
+ComponentType: CIC 
+ComponentName: cicL8046
+ModuleID: 91515 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 23) 
+
+Index: 8047
+ComponentType: CIC 
+ComponentName: cicR8047
+ModuleID: 91515 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 23) 
+
+Index: 8048
+ComponentType: CIC 
+ComponentName: cicL8048
+ModuleID: 91516 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 24) 
+
+Index: 8049
+ComponentType: CIC 
+ComponentName: cicR8049
+ModuleID: 91516 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 24) 
+
+Index: 8050
+ComponentType: CIC 
+ComponentName: cicL8050
+ModuleID: 91517 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 25) 
+
+Index: 8051
+ComponentType: CIC 
+ComponentName: cicR8051
+ModuleID: 91517 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 25) 
+
+Index: 8052
+ComponentType: CIC 
+ComponentName: cicL8052
+ModuleID: 91518 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 26) 
+
+Index: 8053
+ComponentType: CIC 
+ComponentName: cicR8053
+ModuleID: 91518 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 26) 
+
+Index: 8054
+ComponentType: CIC 
+ComponentName: cicL8054
+ModuleID: 91519
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 27) 
+
+Index: 8055
+ComponentType: CIC 
+ComponentName: cicR8055
+ModuleID: 91519
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 27) 
+
+Index: 8056
+ComponentType: CIC 
+ComponentName: cicL8056
+ModuleID: 101911 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 28) 
+
+Index: 8057
+ComponentType: CIC 
+ComponentName: cicR8057
+ModuleID: 101911 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 28) 
+
+Index: 8058
+ComponentType: CIC 
+ComponentName: cicL8058
+ModuleID: 101912 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 29) 
+
+Index: 8059
+ComponentType: CIC 
+ComponentName: cicR8059
+ModuleID: 101912 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 29) 
+
+Index: 8060
+ComponentType: CIC 
+ComponentName: cicL8060
+ModuleID: 101913 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 30) 
+
+Index: 8061
+ComponentType: CIC 
+ComponentName: cicR8061
+ModuleID: 101913 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 30) 
+
+Index: 8062
+ComponentType: CIC 
+ComponentName: cicL8062
+ModuleID: 101914 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 31) 
+
+Index: 8063
+ComponentType: CIC 
+ComponentName: cicR8063
+ModuleID: 101914 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 31) 
+
+Index: 8064
+ComponentType: CIC 
+ComponentName: cicL8064
+ModuleID: 101915 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 32) 
+
+Index: 8065
+ComponentType: CIC 
+ComponentName: cicR8065
+ModuleID: 101915 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 32) 
+
+Index: 8066
+ComponentType: CIC 
+ComponentName: cicL8066
+ModuleID: 101916 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 33) 
+
+Index: 8067
+ComponentType: CIC 
+ComponentName: cicR8067
+ModuleID: 101916 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 33) 
+
+Index: 8068
+ComponentType: CIC 
+ComponentName: cicL8068
+ModuleID: 101917 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 34) 
+
+Index: 8069
+ComponentType: CIC 
+ComponentName: cicR8069
+ModuleID: 101917 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 34) 
+
+Index: 8070
+ComponentType: CIC 
+ComponentName: cicL8070
+ModuleID: 101918
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 35) 
+
+Index: 8071
+ComponentType: CIC 
+ComponentName: cicR8071
+ModuleID: 101918
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 35) 
+
+Index: 8072
+ComponentType: CIC 
+ComponentName: cicL8072
+ModuleID: 101919 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 36) 
+
+Index: 8073
+ComponentType: CIC 
+ComponentName: cicR8073
+ModuleID: 101919 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 36) 
+
+Index: 8074
+ComponentType: CIC 
+ComponentName: cicL8074
+ModuleID: 101920 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 37) 
+
+Index: 8075
+ComponentType: CIC 
+ComponentName: cicR8075
+ModuleID: 101920 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 37) 
+
+Index: 8076
+ComponentType: CIC 
+ComponentName: cicL8076
+ModuleID: 102012 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 38) 
+
+Index: 8077
+ComponentType: CIC 
+ComponentName: cicR8077
+ModuleID: 102012 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 38) 
+
+Index: 8078
+ComponentType: CIC 
+ComponentName: cicL8078
+ModuleID: 102014
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 39) 
+
+Index: 8079
+ComponentType: CIC 
+ComponentName: cicR8079
+ModuleID: 102014
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 39) 
+
+Index: 8080
+ComponentType: CIC 
+ComponentName: cicL8080
+ModuleID: 102011 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 37) 
+
+Index: 8081
+ComponentType: CIC 
+ComponentName: cicR8081
+ModuleID: 102011 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 37) 
+
+Index: 8082
+ComponentType: CIC 
+ComponentName: cicL8082
+ModuleID: 102013 
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 38) 
+
+Index: 8083
+ComponentType: CIC 
+ComponentName: cicR8083
+ModuleID: 102013 
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 38) 
+
+Index: 8084
+ComponentType: CIC 
+ComponentName: cicL8084
+ModuleID: 102015
+Segment: L 
+Frequency: 250 MHz 
+OutputConnections: (10080, 0, 39) 
+
+Index: 8085
+ComponentType: CIC 
+ComponentName: cicR8085
+ModuleID: 102015
+Segment: R 
+Frequency: 250 MHz 
+OutputConnections: (10081, 0, 39) 
+
