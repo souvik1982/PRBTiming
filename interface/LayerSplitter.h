@@ -9,9 +9,8 @@ class LayerSplitter: public Component
     LayerSplitter(std::string name, double frequency);
     void fillInputData(int bXoutputPin, int prbInputPin, std::vector<std::vector<Stub*> > data_PRBF1);
     bool computeOutputTimes();
-    void writeHistograms();
+    void clearData();
     
-    std::vector<std::vector<std::vector<Stub*> > > data_PRBF2_; // [layer][PRB][i]
     std::vector<std::vector<Stub*> > data_PRBF2_ByPRB_; // [PRB][i] -- is required for computing t1out
     
 };

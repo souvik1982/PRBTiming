@@ -23,9 +23,6 @@ LayerSplitter::LayerSplitter(std::string name, double frequency)
     v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t2out").c_str(), 1000, 0, 1000.));
   }
   
-  data_PRBF2_.resize(6);
-  for (unsigned int i=0; i<6; ++i)
-    data_PRBF2_.at(i).resize(8);
   data_PRBF2_ByPRB_.resize(8);
   
   std::cout<<"LOG: Initialized LayerSplitter "<<name_<<" with operating frequency = "<<frequency_<<std::endl;
@@ -36,7 +33,6 @@ void LayerSplitter::fillInputData(int bXoutputPin, int prbInputPin, std::vector<
   for (unsigned int j=0; j<data_PRBF1.at(bXoutputPin).size(); ++j)
   {
     Stub *stub=data_PRBF1.at(bXoutputPin).at(j);
-    data_PRBF2_.at(stub->layer_-5).at(prbInputPin).push_back(stub);
     data_PRBF2_ByPRB_.at(prbInputPin).push_back(stub);
   }
 }
@@ -144,7 +140,10 @@ bool LayerSplitter::computeOutputTimes()
   return true;
 }
 
-void LayerSplitter::writeHistograms()
+void LayerSplitter::clearData()
 {
-}
-      
+  for (unsigned int i=0; i<data_PRBF2_ByPRB_.size(); ++i)
+  {
+    data_PRBF2_ByPRB_.at(i).clear();
+  }
+}     

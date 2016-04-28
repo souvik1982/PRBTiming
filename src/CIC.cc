@@ -29,6 +29,7 @@ bool CIC::computeOutputTimes()
   return true;
 }
 
-void CIC::writeHistograms()
+void CIC::clearData()
 {
+  data_PRBF0_.clear();
 }

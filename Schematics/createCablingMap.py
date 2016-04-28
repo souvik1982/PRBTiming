@@ -7,9 +7,9 @@ import datetime
 today=datetime.date.today()
 
 import urllib2
-prb=0
-inFile = urllib2.urlopen("https://raw.githubusercontent.com/zhenhu/TrackTriggerDemo/master/inputfiles/ModuleMap01.txt")
-outFile = open("Schematic_CablingMap_PRB"+str(prb)+".txt", 'w')
+prb=9
+inFile = urllib2.urlopen("https://raw.githubusercontent.com/zhenhu/TrackTriggerDemo/master/inputfiles/ModuleMap10.txt")
+outFile = open("Schematic_CablingMap_PRB"+str(prb)+"_raw.txt", 'w')
 
 outFile.write("# === Cabling Map from CICs to PRB"+str(prb)+" === \n")
 outFile.write("# Author: Souvik Das \n")

@@ -9,7 +9,7 @@ class CIC: public Component
     CIC(std::string name, int moduleID, std::string segment, double frequency);
     void fillInputData(int BX, int modId, int layer);
     bool computeOutputTimes();
-    void writeHistograms();
+    void clearData();
     
     int moduleID_;
     std::string segment_;

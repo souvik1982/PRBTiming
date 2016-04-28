@@ -38,10 +38,15 @@ std::map<std::string, std::string> readConfigurationLine(std::ifstream *file, st
 
 typedef std::map<int, CIC*> MapModuleIDCIC;
 
-void readConfigurationFile(std::string schematicFilename, MapComponentRelations *map_componentRelations, MapModuleIDCIC *map_modId_CIC)
+void readConfigurationFile(std::string schematicDir, std::string schematicFile, MapComponentRelations *map_componentRelations, MapModuleIDCIC *map_modId_CIC)
 {
-  std::cout<<"schematicFilename = "<<schematicFilename<<std::endl;
-  std::ifstream file(schematicFilename.c_str());
+  std::cout<<"Schematic File = "<<(schematicDir+"/"+schematicFile)<<std::endl;
+  std::ifstream file((schematicDir+"/"+schematicFile).c_str());
+  if (file.is_open()==false) 
+  {
+    std::cout<<"ERROR: Could not open the file."<<std::endl;
+    return;
+  }
   std::string s;
   getline(file, s);
   while (!file.eof())
@@ -54,8 +59,8 @@ void readConfigurationFile(std::string schematicFilename, MapComponentRelations 
     
     if (s.find("Import")!=std::string::npos) // Go into this schematic
     {
-      std::string subSchematicFilename=argInLine(s, "Import");
-      readConfigurationFile(subSchematicFilename, map_componentRelations, map_modId_CIC);
+      std::string subSchematicFile=argInLine(s, "Import");
+      readConfigurationFile(schematicDir, subSchematicFile, map_componentRelations, map_modId_CIC);
     }
     else if (s.find("Index")!=std::string::npos)
     {

@@ -72,6 +72,10 @@ bool BXSplitter::computeOutputTimes()
   return true;
 }
 
-void BXSplitter::writeHistograms()
+void BXSplitter::clearData()
 {
+  for (unsigned int i=0; i<data_PRBF1_.size(); ++i)
+  {
+    data_PRBF1_.at(i).clear();
+  }
 }

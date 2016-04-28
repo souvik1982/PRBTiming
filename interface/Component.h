@@ -23,7 +23,8 @@ class Component
     
     void clearValues();
     
-    virtual bool computeOutputTimes() = 0;
+    virtual bool computeOutputTimes()=0;
+    virtual void clearData()=0;
   
   protected:
     int nInputs_;

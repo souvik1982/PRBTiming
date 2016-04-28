@@ -21,112 +21,112 @@ Import: Schematic_CablingMap_PRB7.txt
 # ---------
 Index: 10000
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10000
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20000, 0, 0) (20000, 1, 1) (20000, 2, 2) (20000, 3, 3) (20000, 4, 4) (20000, 5, 5) (20000, 6, 6) (20000, 7, 7)
 
 Index: 10001
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10001
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20001, 0, 0) (20001, 1, 1) (20001, 2, 2) (20001, 3, 3) (20001, 4, 4) (20001, 5, 5) (20001, 6, 6) (20001, 7, 7)
 
 Index: 10010
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10010
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20010, 0, 0) (20010, 1, 1) (20010, 2, 2) (20010, 3, 3) (20010, 4, 4) (20010, 5, 5) (20010, 6, 6) (20010, 7, 7)
 
 Index: 10011
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10011
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20011, 0, 0) (20011, 1, 1) (20011, 2, 2) (20011, 3, 3) (20011, 4, 4) (20011, 5, 5) (20011, 6, 6) (20011, 7, 7)
 
 Index: 10020
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10020
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20020, 0, 0) (20020, 1, 1) (20020, 2, 2) (20020, 3, 3) (20020, 4, 4) (20020, 5, 5) (20020, 6, 6) (20020, 7, 7)
 
 Index: 10021
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10021
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20021, 0, 0) (20021, 1, 1) (20021, 2, 2) (20021, 3, 3) (20021, 4, 4) (20021, 5, 5) (20021, 6, 6) (20021, 7, 7)
 
 Index: 10030
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10030
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20030, 0, 0) (20030, 1, 1) (20030, 2, 2) (20030, 3, 3) (20030, 4, 4) (20030, 5, 5) (20030, 6, 6) (20030, 7, 7)
 
 Index: 10031
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10031
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20031, 0, 0) (20031, 1, 1) (20031, 2, 2) (20031, 3, 3) (20031, 4, 4) (20031, 5, 5) (20031, 6, 6) (20031, 7, 7)
 
 Index: 10040
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10040
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20040, 0, 0) (20040, 1, 1) (20040, 2, 2) (20040, 3, 3) (20040, 4, 4) (20040, 5, 5) (20040, 6, 6) (20040, 7, 7)
 
 Index: 10041
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10041
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20041, 0, 0) (20041, 1, 1) (20041, 2, 2) (20041, 3, 3) (20041, 4, 4) (20041, 5, 5) (20041, 6, 6) (20041, 7, 7)
 
 Index: 10050
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10050
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20050, 0, 0) (20050, 1, 1) (20050, 2, 2) (20050, 3, 3) (20050, 4, 4) (20050, 5, 5) (20050, 6, 6) (20050, 7, 7)
 
 Index: 10051
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10051
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20051, 0, 0) (20051, 1, 1) (20051, 2, 2) (20051, 3, 3) (20051, 4, 4) (20051, 5, 5) (20051, 6, 6) (20051, 7, 7)
 
 Index: 10060
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10060
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20060, 0, 0) (20060, 1, 1) (20060, 2, 2) (20060, 3, 3) (20060, 4, 4) (20060, 5, 5) (20060, 6, 6) (20060, 7, 7)
 
 Index: 10061
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10061
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20061, 0, 0) (20061, 1, 1) (20061, 2, 2) (20061, 3, 3) (20061, 4, 4) (20061, 5, 5) (20061, 6, 6) (20061, 7, 7)
 
 Index: 10070
 ComponentType: Receiver
-ComponentName: rxL_0
+ComponentName: rxL_10070
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20070, 0, 0) (20070, 1, 1) (20070, 2, 2) (20070, 3, 3) (20070, 4, 4) (20070, 5, 5) (20070, 6, 6) (20070, 7, 7)
 
 Index: 10071
 ComponentType: Receiver
-ComponentName: rxR_0
+ComponentName: rxR_10071
 Frequency: 250 MHz
 DelayCLK: 5
 OutputConnections: (20071, 0, 0) (20071, 1, 1) (20071, 2, 2) (20071, 3, 3) (20071, 4, 4) (20071, 5, 5) (20071, 6, 6) (20071, 7, 7)
@@ -137,97 +137,97 @@ OutputConnections: (20071, 0, 0) (20071, 1, 1) (20071, 2, 2) (20071, 3, 3) (2007
 
 Index: 20000
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20000
 Frequency: 250 MHz
 OutputConnections: (30000, 0, 0) (30000, 1, 1) (30000, 2, 2) (30000, 3, 3) (30000, 4, 4) (30000, 5, 5) (30000, 6, 6) (30000, 7, 7)
 
 Index: 20001
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20001
 Frequency: 250 MHz
 OutputConnections: (30001, 0, 0) (30001, 1, 1) (30001, 2, 2) (30001, 3, 3) (30001, 4, 4) (30001, 5, 5) (30001, 6, 6) (30001, 7, 7)
 
 Index: 20010
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20010
 Frequency: 250 MHz
 OutputConnections: (30010, 0, 0) (30010, 1, 1) (30010, 2, 2) (30010, 3, 3) (30010, 4, 4) (30010, 5, 5) (30010, 6, 6) (30010, 7, 7)
 
 Index: 20011
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20011
 Frequency: 250 MHz
 OutputConnections: (30011, 0, 0) (30011, 1, 1) (30011, 2, 2) (30011, 3, 3) (30011, 4, 4) (30011, 5, 5) (30011, 6, 6) (30011, 7, 7)
 
 Index: 20020
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20020
 Frequency: 250 MHz
 OutputConnections: (30020, 0, 0) (30020, 1, 1) (30020, 2, 2) (30020, 3, 3) (30020, 4, 4) (30020, 5, 5) (30020, 6, 6) (30020, 7, 7)
 
 Index: 20021
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20021
 Frequency: 250 MHz
 OutputConnections: (30021, 0, 0) (30021, 1, 1) (30021, 2, 2) (30021, 3, 3) (30021, 4, 4) (30021, 5, 5) (30021, 6, 6) (30021, 7, 7)
 
 Index: 20030
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20030
 Frequency: 250 MHz
 OutputConnections: (30030, 0, 0) (30030, 1, 1) (30030, 2, 2) (30030, 3, 3) (30030, 4, 4) (30030, 5, 5) (30030, 6, 6) (30030, 7, 7)
 
 Index: 20031
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20031
 Frequency: 250 MHz
 OutputConnections: (30031, 0, 0) (30031, 1, 1) (30031, 2, 2) (30031, 3, 3) (30031, 4, 4) (30031, 5, 5) (30031, 6, 6) (30031, 7, 7)
 
 Index: 20040
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20040
 Frequency: 250 MHz
 OutputConnections: (30040, 0, 0) (30040, 1, 1) (30040, 2, 2) (30040, 3, 3) (30040, 4, 4) (30040, 5, 5) (30040, 6, 6) (30040, 7, 7)
 
 Index: 20041
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20041
 Frequency: 250 MHz
 OutputConnections: (30041, 0, 0) (30041, 1, 1) (30041, 2, 2) (30041, 3, 3) (30041, 4, 4) (30041, 5, 5) (30041, 6, 6) (30041, 7, 7)
 
 Index: 20050
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20050
 Frequency: 250 MHz
 OutputConnections: (30050, 0, 0) (30050, 1, 1) (30050, 2, 2) (30050, 3, 3) (30050, 4, 4) (30050, 5, 5) (30050, 6, 6) (30050, 7, 7)
 
 Index: 20051
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20051
 Frequency: 250 MHz
 OutputConnections: (30051, 0, 0) (30051, 1, 1) (30051, 2, 2) (30051, 3, 3) (30051, 4, 4) (30051, 5, 5) (30051, 6, 6) (30051, 7, 7)
 
 Index: 20060
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20060
 Frequency: 250 MHz
 OutputConnections: (30060, 0, 0) (30060, 1, 1) (30060, 2, 2) (30060, 3, 3) (30060, 4, 4) (30060, 5, 5) (30060, 6, 6) (30060, 7, 7)
 
 Index: 20061
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20061
 Frequency: 250 MHz
 OutputConnections: (30061, 0, 0) (30061, 1, 1) (30061, 2, 2) (30061, 3, 3) (30061, 4, 4) (30061, 5, 5) (30061, 6, 6) (30061, 7, 7)
 
 Index: 20070
 ComponentType: BXSplitter
-ComponentName: bxSplitterL_0
+ComponentName: bxSplitterL_20070
 Frequency: 250 MHz
 OutputConnections: (30070, 0, 0) (30070, 1, 1) (30070, 2, 2) (30070, 3, 3) (30070, 4, 4) (30070, 5, 5) (30070, 6, 6) (30070, 7, 7)
 
 Index: 20071
 ComponentType: BXSplitter
-ComponentName: bxSplitterR_0
+ComponentName: bxSplitterR_20071
 Frequency: 250 MHz
 OutputConnections: (30071, 0, 0) (30071, 1, 1) (30071, 2, 2) (30071, 3, 3) (30071, 4, 4) (30071, 5, 5) (30071, 6, 6) (30071, 7, 7)
 
@@ -237,96 +237,96 @@ OutputConnections: (30071, 0, 0) (30071, 1, 1) (30071, 2, 2) (30071, 3, 3) (3007
 
 Index: 30000
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30000
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30001
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30001
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30010
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30010
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30011
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30011
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30020
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30020
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30021
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30021
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30030
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30030
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30031
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30031
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30040
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30040
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30041
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30041
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30050
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30050
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30051
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30051
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30060
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30060
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30061
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30061
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30070
 ComponentType: LayerSplitter
-ComponentName: layerSplitter1_0
+ComponentName: layerSplitter1_30070
 Frequency: 250 MHz
 OutputConnections:
 
 Index: 30071
 ComponentType: LayerSplitter
-ComponentName: layerSplitter2_0
+ComponentName: layerSplitter2_30071
 Frequency: 250 MHz
 OutputConnections:

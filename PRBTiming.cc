@@ -1,3 +1,8 @@
+// === Pattern Recognition Board Timing Model === 
+// Author: Souvik Das 
+// Date: Apr 26, 2016
+// ============================================== 
+
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -20,20 +25,22 @@
 
 int main(int argc, char *argv[])
 {
-  std::string schematicFilename="Schematic.txt";
+  std::string schematicDir;
+  std::string schematicFile="Schematic.txt";
   std::string inputDir;
   std::string inputFile="tracks.root";
   
   // Get command line arguments
   std::map<std::string, std::string> cmdMap=commandLineArguments(argc, argv);
-  if (cmdMap.find("-schematic")!=cmdMap.end()) schematicFilename=cmdMap["-schematic"];
+  if (cmdMap.find("-schematicDir")!=cmdMap.end()) schematicDir=cmdMap["-schematicDir"];
+  if (cmdMap.find("-schematicFile")!=cmdMap.end()) schematicFile=cmdMap["-schematicFile"];
   if (cmdMap.find("-inputDir")!=cmdMap.end())  inputDir=cmdMap["-inputDir"];
   if (cmdMap.find("-inputFile")!=cmdMap.end()) inputFile=cmdMap["-inputFile"];
   
   // Read the schematic file recursively
   MapComponentRelations *map_componentRelations=new MapComponentRelations;
   MapModuleIDCIC *map_modId_CIC=new MapModuleIDCIC;
-  readConfigurationFile(schematicFilename, map_componentRelations, map_modId_CIC);
+  readConfigurationFile(schematicDir, schematicFile, map_componentRelations, map_modId_CIC);
   
   // Read ROOT event files and iterate
   TFile *eventFile=new TFile((inputDir+"/"+inputFile).c_str());
@@ -46,7 +53,8 @@ int main(int argc, char *argv[])
   tree->SetBranchAddress("TTStubs_r", &(stubs_r));
   
   unsigned int nEvents=tree->GetEntries();
-  for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
+  // for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
+  for (unsigned int i_event=0; i_event<200; i_event+=8)
   {
   
     // Bunch 8 events into a train
@@ -121,6 +129,7 @@ int main(int argc, char *argv[])
         
         // Compute timing for receiver and propagate t1out and t2out into inputs for BXSplitter
         receiver->computeOutputTimes();
+        receiver->printOutputTimes();
         
         // Distribute data, and t1in and t2in to BXSplitter
         int targetIndex=componentRelation->i_comp_.at(0);
@@ -209,6 +218,12 @@ int main(int argc, char *argv[])
         // Compute timing for layerSplitter
         layerSplitter->computeOutputTimes();
       }
+    }
+    
+    // Clear data in all components
+    for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
+    {
+      i_comp->second->comp_->clearData();
     }
       
     if (i_event%100==0) std::cout<<"Events "<<i_event<<" out of "<<nEvents<<" have been processed."<<std::endl;
