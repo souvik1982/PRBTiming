@@ -20,8 +20,8 @@ Receiver::Receiver(std::string name, double frequency, double delayCLK)
     t1out_.push_back(-999);
     t2out_.push_back(-999);
     
-    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t1out").c_str(), 1000, 0, 1000.));
-    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t2out").c_str(), 1000, 0, 1000.));
+    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t1out").c_str(), 800, 0, 400.));
+    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t2out").c_str(), 800, 0, 400.));
   }
   
   data_PRBF_RX_.resize(8);

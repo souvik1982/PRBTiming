@@ -18,6 +18,7 @@ class Component
     double get_t2out(unsigned int);
     std::string get_type();
     std::string get_name();
+    double get_frequency();
     void printOutputTimes();
     void writeHistograms();
     

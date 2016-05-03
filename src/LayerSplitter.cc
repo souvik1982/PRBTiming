@@ -94,6 +94,8 @@ bool LayerSplitter::computeOutputTimes()
       ++clk;
     }
     while (clk<maxPRBSize);
+    
+    // std::cout<<"LayerSplitter "<<name_<<" minCLK_layer0 = "<<minCLK_layer0<<", maxCLK_layer0 = "<<maxCLK_layer0<<std::endl;
           
     // This has to be added to the min t1in over all PRBs
     double mintin=1e10;

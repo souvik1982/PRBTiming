@@ -1,0 +1,1 @@
+../PRBTiming -schematicDir /Users/souvik/AMTrackTrigger/PRBTiming/Schematics -schematicFile Schematic.txt -inputDir /Users/souvik/AMTrackTrigger/Samples/SLHC/GEN/620_SLHC25p3_results/test1/Neutrino_PU140_tt27_sf1_nz4_pt3_ml5_20150511

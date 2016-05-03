@@ -19,7 +19,6 @@
 #include "interface/BXSplitter.h"
 #include "interface/LayerSplitter.h"
 #include "interface/loader.h"
-
 #include "src/CommandLineArguments.cc"
 #include "src/ReadConfigurationFile.cc"
 
@@ -53,8 +52,8 @@ int main(int argc, char *argv[])
   tree->SetBranchAddress("TTStubs_r", &(stubs_r));
   
   unsigned int nEvents=tree->GetEntries();
-  // for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
-  for (unsigned int i_event=0; i_event<200; i_event+=8)
+  for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
+  // for (unsigned int i_event=0; i_event<200; i_event+=8)
   {
   
     // Bunch 8 events into a train
@@ -129,7 +128,7 @@ int main(int argc, char *argv[])
         
         // Compute timing for receiver and propagate t1out and t2out into inputs for BXSplitter
         receiver->computeOutputTimes();
-        receiver->printOutputTimes();
+        // receiver->printOutputTimes();
         
         // Distribute data, and t1in and t2in to BXSplitter
         int targetIndex=componentRelation->i_comp_.at(0);
@@ -226,7 +225,7 @@ int main(int argc, char *argv[])
       i_comp->second->comp_->clearData();
     }
       
-    if (i_event%100==0) std::cout<<"Events "<<i_event<<" out of "<<nEvents<<" have been processed."<<std::endl;
+    if (i_event%1000==0) std::cout<<"Events "<<i_event<<" out of "<<nEvents<<" have been processed."<<std::endl;
     
   } // Event loop
   
