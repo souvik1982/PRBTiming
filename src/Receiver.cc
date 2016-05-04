@@ -13,6 +13,9 @@ Receiver::Receiver(std::string name, double frequency, double delayCLK)
   {
     t1in_.push_back(1./frequency_*1000.);
     t2in_.push_back(64./frequency_*1000.);
+    
+    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t1in").c_str(), 800, 0, 400.));
+    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t2in").c_str(), 800, 0, 400.));
   }
   
   for (unsigned int i=0; i<8; ++i)
@@ -39,6 +42,11 @@ void Receiver::fillInputData(int link, std::vector<Stub*> data_PRBF0)
 
 bool Receiver::computeOutputTimes()
 {
+  for (unsigned int i=0; i<40; ++i)
+  {
+    v_h_t1in_.at(i)->Fill(t1in_.at(i));
+    v_h_t2in_.at(i)->Fill(t2in_.at(i));
+  }
   for (unsigned int i=0; i<8; ++i)
   {
     t1out_.at(i)=(delayCLK_+1.)/frequency_*1000.;
