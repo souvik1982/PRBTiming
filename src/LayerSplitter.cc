@@ -13,6 +13,9 @@ LayerSplitter::LayerSplitter(std::string name, double frequency)
   {
     t1in_.push_back(-999);
     t2in_.push_back(-999);
+    
+    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t1in").c_str(), 1000, 0, 1000.));
+    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t2in").c_str(), 1000, 0, 1000.));
   }
   for (unsigned int i_layer=0; i_layer<6; ++i_layer)
   {
@@ -128,6 +131,11 @@ bool LayerSplitter::computeOutputTimes()
     t2out_.at(5)=mintin+(maxCLK_layer5+1)*frequency_/1000.;
     
     // Fill histograms
+    for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
+    {
+      v_h_t1in_.at(i_PRB)->Fill(t1in_.at(i_PRB));
+      v_h_t2in_.at(i_PRB)->Fill(t2in_.at(i_PRB));
+    }
     for (unsigned int i_layer=0; i_layer<6; ++i_layer)
     {
       v_h_t1out_.at(i_layer)->Fill(t1out_.at(i_layer));
