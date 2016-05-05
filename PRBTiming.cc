@@ -61,17 +61,17 @@ int main(int argc, char *argv[])
     {
       unsigned int j_event=i_event+i_BX;
       tree->GetEntry(j_event);
-      
       for (unsigned int i_stub=0; i_stub<stubs_modId->size(); ++i_stub)
       {
         float stub_modId=stubs_modId->at(i_stub);
-        if (map_modId_CIC->find(stub_modId)!=map_modId_CIC->end())
+        std::string segment;
+        if (r3->Uniform()>0.5) segment="L"; else segment="R";
+        if (map_modId_CIC->find(itoa(float(stub_modId))+segment)!=map_modId_CIC->end())
         {
-          CIC *cic=(*map_modId_CIC)[stub_modId];
+          CIC *cic=(*map_modId_CIC)[itoa(float(stub_modId))+segment];
           int layer=int(stub_modId/10000);
           cic->fillInputData(i_BX, stub_modId, layer);
           // std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
-          
         }
         else
         {

@@ -36,7 +36,7 @@ std::map<std::string, std::string> readConfigurationLine(std::ifstream *file, st
   return configMap;
 }
 
-typedef std::map<int, CIC*> MapModuleIDCIC;
+typedef std::map<std::string, CIC*> MapModuleIDCIC;
 
 void readConfigurationFile(std::string schematicDir, std::string schematicFile, MapComponentRelations *map_componentRelations, MapModuleIDCIC *map_modId_CIC)
 {
@@ -87,7 +87,7 @@ void readConfigurationFile(std::string schematicDir, std::string schematicFile, 
           }
           compRelation->comp_=cic;
           (*map_componentRelations)[index]=compRelation;
-          (*map_modId_CIC)[moduleID]=cic;
+          (*map_modId_CIC)[itoa(moduleID)+segment]=cic;
         }
         
         if (componentType=="Receiver")
