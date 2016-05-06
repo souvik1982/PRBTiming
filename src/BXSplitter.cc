@@ -15,10 +15,10 @@ BXSplitter::BXSplitter(std::string name, double frequency)
     t1out_.push_back(-999); // by BX
     t2out_.push_back(-999); // by BX
     
-    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" Link "+itoa(i)+" t1in").c_str(), 1000, 0, 1000.));
-    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" Link "+itoa(i)+" t2in").c_str(), 1000, 0, 1000.));
-    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t1out").c_str(), 1000, 0, 1000.));
-    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t2out").c_str(), 1000, 0, 1000.));
+    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" Link "+itoa(i)+" t1in").c_str(), 2000, 0, 1000.));
+    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" Link "+itoa(i)+" t2in").c_str(), 2000, 0, 1000.));
+    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t1out").c_str(), 2000, 0, 1000.));
+    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t2out").c_str(), 2000, 0, 1000.));
   }
   
   data_PRBF1_.resize(8);

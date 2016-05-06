@@ -47,9 +47,11 @@ int main(int argc, char *argv[])
   
   std::vector<float> *stubs_modId=0;
   std::vector<float> *stubs_r=0;
+  std::vector<float> *stubs_coordy=0;
   
   tree->SetBranchAddress("TTStubs_modId", &(stubs_modId));
   tree->SetBranchAddress("TTStubs_r", &(stubs_r));
+  tree->SetBranchAddress("TTStubs_coordy", &(stubs_coordy));
   
   unsigned int nEvents=tree->GetEntries();
   for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
@@ -64,12 +66,22 @@ int main(int argc, char *argv[])
       for (unsigned int i_stub=0; i_stub<stubs_modId->size(); ++i_stub)
       {
         float stub_modId=stubs_modId->at(i_stub);
+        float stub_coordy=stubs_coordy->at(i_stub);
+        int layer=int(stub_modId/10000);
         std::string segment;
-        if (r3->Uniform()>0.5) segment="L"; else segment="R";
+        if (5<=layer && layer<=7)
+        {
+          if (stub_coordy<16) segment="L";
+          else segment="R";
+        }
+        else if (8<=layer && layer<=10)
+        {
+          if (stub_coordy==0) segment="L";
+          else segment="R";
+        }
         if (map_modId_CIC->find(itoa(float(stub_modId))+segment)!=map_modId_CIC->end())
         {
           CIC *cic=(*map_modId_CIC)[itoa(float(stub_modId))+segment];
-          int layer=int(stub_modId/10000);
           cic->fillInputData(i_BX, stub_modId, layer);
           // std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
         }

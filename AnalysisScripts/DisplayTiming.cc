@@ -79,7 +79,7 @@ void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, st
   
   int minBin=std::min(h1->FindFirstBinAbove(0, 1), h2->FindFirstBinAbove(0, 1));
   int maxBin=std::max(h1->FindLastBinAbove(0, 1), h2->FindLastBinAbove(0, 1));
-  h1->GetXaxis()->SetRange(minBin-5, maxBin+5);
+  h1->GetXaxis()->SetRange(minBin-10, maxBin+10);
   h1->SetLineColor(kBlue);
   h2->SetLineColor(kGreen+2);
   h1->SetTitle(("; "+componentType+" "+name_s+" ("+units+")").c_str());
@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
       TFile *f_cic=new TFile((cic->get_name()+".root").c_str());
       TH1F *h_t1in_cic=(TH1F*)f_cic->Get(("h_t1in_"+name_s).c_str());
       TH1F *h_t2in_cic=(TH1F*)f_cic->Get(("h_t2in_"+name_s).c_str());
-      TH1F *h_t1out_cic=(TH1F*)f_cic->Get(("h_t2out_"+name_s).c_str());
+      TH1F *h_t1out_cic=(TH1F*)f_cic->Get(("h_t1out_"+name_s).c_str());
       TH1F *h_t2out_cic=(TH1F*)f_cic->Get(("h_t2out_"+name_s).c_str());
       makeCanvas(h_t1in_cic, h_t2in_cic, "in", percentile, name_s+"_in", "CIC", "ns");
       makeCanvas(h_t1out_cic, h_t2out_cic, "out", percentile, name_s+"_out", "CIC", "ns");

@@ -14,16 +14,16 @@ LayerSplitter::LayerSplitter(std::string name, double frequency)
     t1in_.push_back(-999);
     t2in_.push_back(-999);
     
-    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t1in").c_str(), 1000, 0, 1000.));
-    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t2in").c_str(), 1000, 0, 1000.));
+    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t1in").c_str(), 2000, 0, 1000.));
+    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t2in").c_str(), 2000, 0, 1000.));
   }
   for (unsigned int i_layer=0; i_layer<6; ++i_layer)
   {
     t1out_.push_back(-999);
     t2out_.push_back(-999);
     
-    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t1out").c_str(), 1000, 0, 1000.));
-    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t2out").c_str(), 1000, 0, 1000.));
+    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t1out").c_str(), 2000, 0, 1000.));
+    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t2out").c_str(), 2000, 0, 1000.));
   }
   
   data_PRBF2_ByPRB_.resize(8);
