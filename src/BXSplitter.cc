@@ -19,6 +19,8 @@ BXSplitter::BXSplitter(std::string name, double frequency)
     v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" Link "+itoa(i)+" t2in").c_str(), 2000, 0, 1000.));
     v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t1out").c_str(), 2000, 0, 1000.));
     v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" t2out").c_str(), 2000, 0, 1000.));
+    
+    v_h_nStubs_.push_back(new TH1F(("h_nStubs_"+name_+"_"+itoa(i)).c_str(), ("; BXSplitter "+name_+" BX "+itoa(i)+" nStubs").c_str(), 1000, 0, 200));
   }
   
   data_PRBF1_.resize(8);
@@ -66,6 +68,8 @@ bool BXSplitter::computeOutputTimes()
       
       v_h_t1out_.at(i_BX)->Fill(t1out_.at(i_BX));
       v_h_t2out_.at(i_BX)->Fill(t2out_.at(i_BX));
+      
+      v_h_nStubs_.at(i_BX)->Fill(data_PRBF1_.at(i_BX).size());
     }
   }
   else
@@ -75,6 +79,16 @@ bool BXSplitter::computeOutputTimes()
   }
   
   return true;
+}
+
+void BXSplitter::writeDataHistograms()
+{
+  TFile *file=new TFile((name_+".root").c_str(), "update");
+  for (unsigned int i_BX=0; i_BX<8; ++i_BX)
+  {
+    v_h_nStubs_.at(i_BX)->Write();
+  }
+  file->Close();
 }
 
 void BXSplitter::clearData()
