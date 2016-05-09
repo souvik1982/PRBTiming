@@ -27,6 +27,8 @@ CIC::CIC(std::string name, int moduleID, std::string segment, double frequency)
   v_h_t1out_.at(0)->Fill(t1out_.at(0));
   v_h_t2out_.at(0)->Fill(t2out_.at(0));
   
+  h_nStubs_=new TH1F(("h_nStubs_"+name_).c_str(), ("; CIC "+name_+" nStubs").c_str(), 1000, 0, 200.);
+  
   std::cout<<"LOG: Initialized CIC "<<name_<<" with moduleID = "<<moduleID_<<", segment = "<<segment_<<", operating frequency = "<<frequency_<<std::endl;
 }
 
@@ -38,7 +40,15 @@ void CIC::fillInputData(int bx, int modID, int layer)
 
 bool CIC::computeOutputTimes()
 {
+  h_nStubs_->Fill(data_PRBF0_.size());
   return true;
+}
+
+void CIC::writeDataHistograms()
+{
+  TFile *file=new TFile((name_+".root").c_str(), "update");
+  h_nStubs_->Write();
+  file->Close();
 }
 
 void CIC::clearData()
