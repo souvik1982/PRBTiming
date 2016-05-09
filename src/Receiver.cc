@@ -25,6 +25,8 @@ Receiver::Receiver(std::string name, double frequency, double delayCLK)
     
     v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t1out").c_str(), 2000, 0, 1000.));
     v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t2out").c_str(), 2000, 0, 1000.));
+  
+    v_h_nStubs_.push_back(new TH1F(("h_nStubs_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" nStubs").c_str(), 1000, 0, 200.));
   }
   
   data_PRBF_RX_.resize(8);
@@ -54,6 +56,8 @@ bool Receiver::computeOutputTimes()
     
     v_h_t1out_.at(i)->Fill(t1out_.at(i));
     v_h_t2out_.at(i)->Fill(t2out_.at(i));
+    
+    v_h_nStubs_.at(i)->Fill(data_PRBF_RX_.at(i).size());
   }
   return true;
 }
