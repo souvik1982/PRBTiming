@@ -62,6 +62,16 @@ bool Receiver::computeOutputTimes()
   return true;
 }
 
+void Receiver::writeDataHistograms()
+{
+  TFile *file=new TFile((name_+".root").c_str(), "update");
+  for (unsigned int i=0; i<8; ++i)
+  {
+    v_h_nStubs_.at(i)->Write();
+  }
+  file->Close();
+}
+
 void Receiver::clearData()
 {
   for (unsigned int i=0; i<data_PRBF_RX_.size(); ++i)

@@ -16,6 +16,8 @@ LayerSplitter::LayerSplitter(std::string name, double frequency)
     
     v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t1in").c_str(), 2000, 0, 1000.));
     v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t2in").c_str(), 2000, 0, 1000.));
+  
+    v_h_nStubs_.push_back(new TH1F(("h_nStubs_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" nStubs").c_str(), 1000, 0, 200.));
   }
   for (unsigned int i_layer=0; i_layer<6; ++i_layer)
   {
@@ -135,6 +137,8 @@ bool LayerSplitter::computeOutputTimes()
     {
       v_h_t1in_.at(i_PRB)->Fill(t1in_.at(i_PRB));
       v_h_t2in_.at(i_PRB)->Fill(t2in_.at(i_PRB));
+      
+      v_h_nStubs_.at(i_PRB)->Fill(data_PRBF2_ByPRB_.at(i_PRB).size());
     }
     for (unsigned int i_layer=0; i_layer<6; ++i_layer)
     {
@@ -148,6 +152,16 @@ bool LayerSplitter::computeOutputTimes()
   }
   
   return true;
+}
+
+void LayerSplitter::writeDataHistograms()
+{
+  TFile *file=new TFile((name_+".root").c_str(), "update");
+  for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
+  {
+    v_h_nStubs_.at(i_PRB)->Write();
+  }
+  file->Close();
 }
 
 void LayerSplitter::clearData()
