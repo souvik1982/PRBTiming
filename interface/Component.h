@@ -21,6 +21,7 @@ class Component
     double get_frequency();
     void printOutputTimes();
     void writeHistograms();
+    virtual void writeDataHistograms()=0;
     
     void clearValues();
     

@@ -246,6 +246,7 @@ int main(int argc, char *argv[])
   for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
   {
     i_comp->second->comp_->writeHistograms();
+    i_comp->second->comp_->writeDataHistograms();
   }
     
   

@@ -13,5 +13,7 @@ class LayerSplitter: public Component
     void clearData();
     
     std::vector<std::vector<Stub*> > data_PRBF2_ByPRB_; // [PRB][i] -- is required for computing t1out
-    std::vector<TH1F*> v_h_nStubs_;
+    std::vector<std::vector<Stub*> > data_PRBF2_ByLayer_; // [Layer][i] -- is used for plotting
+    std::vector<TH1F*> v_h_nStubs_ByPRB_;
+    std::vector<TH1F*> v_h_nStubs_ByLayer_;
 };
