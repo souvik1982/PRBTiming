@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
       if (component->get_type()=="CIC")
       {
         CIC *cic=(CIC*)component;
+        cic->computeOutputTimes();
         for (unsigned int i_pin=0; i_pin<componentRelation->i_comp_.size(); ++i_pin)
         {
           int targetIndex=componentRelation->i_comp_.at(i_pin);

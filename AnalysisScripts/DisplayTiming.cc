@@ -21,8 +21,6 @@
 #include "../src/CommandLineArguments.cc"
 #include "../src/ReadConfigurationFile.cc"
 
-bool logScale=false;
-
 std::string ftoa2(double i) 
 {
   char res[10];
@@ -54,29 +52,40 @@ int fixRange(TH1F *h)
   return rebin;
 }
 
-void makeCanvas(TH1F *h1, double percentile, std::string name_s, std::string componentType, std::string units="", int color=kBlue)
+void makeCanvas(TH1F *h1, double percentile, std::string name_s, std::string componentType, std::string units="", bool logScale=false)
 {
-  h1->SetLineColor(color);
-  h1->GetXaxis()->SetRange(h1->FindFirstBinAbove(0, 1)-1, h1->FindLastBinAbove(0, 1)+1);
-  TCanvas *c=new TCanvas(("c_"+name_s).c_str(), ("c_"+name_s).c_str(), 700, 700);
-  if (logScale) c->SetLogy();
+  h1->GetXaxis()->SetRange(h1->FindFirstBinAbove(0, 1)-10, h1->FindLastBinAbove(0, 1)+10);
+  h1->SetLineColor(kRed);
   h1->SetTitle(("; "+componentType+" "+name_s+" ("+units+")").c_str());
-  h1->Draw("");
-  double perc[1]={percentile};
-  double values[1];
-  h1->GetQuantiles(1, values, perc);
-  TLegend *leg=new TLegend(0.6, 0.7, 0.89, 0.89);
+  double perc[2]={0.5, percentile};
+  double values[2];
+  h1->GetQuantiles(2, values, perc);
+  
+  TCanvas *c=new TCanvas(("c_"+name_s).c_str(), ("c_"+name_s).c_str(), 700, 700);
+  TPad *p_1=new TPad(("p_1_"+name_s).c_str(), ("p_1_"+name_s).c_str(), 0, 0, 1.0, 0.90);
+  TPad *p_2=new TPad(("p_2_"+name_s).c_str(), ("p_2_"+name_s).c_str(), 0, 0.90, 1.0, 1.0);
+  p_1->Draw();
+  p_2->Draw();
+  
+  p_1->cd();
+  if (logScale) c->SetLogy();
+  h1->Draw();
+  TArrow *arrow=new TArrow(values[1], h1->GetMaximum()*0.5, values[1], 0, 0.05, "|>");
+  arrow->SetLineColor(kBlack); arrow->Draw();
+  p_1->Update();
+  
+  p_2->cd();
+  TLegend *leg=new TLegend(0.1, -0.2, 0.9, 0.8);
   leg->SetBorderSize(0);
-  leg->AddEntry(h1, (ftoa3(percentile)+" perc: "+ftoa2(values[0])+" "+units).c_str());
+  leg->AddEntry(h1, ("#mu = "+ftoa2(values[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa2(values[1])+" "+units).c_str());
   leg->Draw();
-  TArrow *arrow=new TArrow(values[0], h1->GetMaximum()*0.5, values[0], 0, 0.05, "|>");
-  arrow->Draw();
+  p_2->Update();
+  
   c->SaveAs(("c_"+name_s+".png").c_str());
 }
 
-void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, std::string name_s, std::string componentType, std::string units="")
-{
-  
+void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, std::string name_s, std::string componentType, std::string units="", bool logScale=false)
+{ 
   int minBin=std::min(h1->FindFirstBinAbove(0, 1), h2->FindFirstBinAbove(0, 1));
   int maxBin=std::max(h1->FindLastBinAbove(0, 1), h2->FindLastBinAbove(0, 1));
   h1->GetXaxis()->SetRange(minBin-10, maxBin+10);
@@ -184,8 +193,10 @@ int main(int argc, char *argv[])
       TH1F *h_t2in_cic=(TH1F*)f_cic->Get(("h_t2in_"+name_s).c_str());
       TH1F *h_t1out_cic=(TH1F*)f_cic->Get(("h_t1out_"+name_s).c_str());
       TH1F *h_t2out_cic=(TH1F*)f_cic->Get(("h_t2out_"+name_s).c_str());
+      TH1F *h_nStubs_cic=(TH1F*)f_cic->Get(("h_nStubs_"+name_s).c_str());
       makeCanvas(h_t1in_cic, h_t2in_cic, "in", percentile, name_s+"_in", "CIC", "ns");
       makeCanvas(h_t1out_cic, h_t2out_cic, "out", percentile, name_s+"_out", "CIC", "ns");
+      makeCanvas(h_nStubs_cic, percentile, name_s+"_nStubs", "CIC", "nStubs");
       f_cic->Close();
       
       std::ofstream outfile((name_s+".html").c_str());
@@ -201,8 +212,15 @@ int main(int argc, char *argv[])
       outfile<<" Segment: "<<segment<<"<br/>"<<std::endl;
       outfile<<" Operating frequency: "<<frequency<<"MHz <br/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
-      outfile<<"<img width=\"500em\" src='"<<("c_"+name_s+"_in.png")<<"'/>"<<std::endl;
-      outfile<<"<img width=\"500em\" src='"<<("c_"+name_s+"_out.png")<<"'/>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2 align='center'> Data Histograms </h2>"<<std::endl;
+      outfile<<" <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs.png")<<"'/>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2 align='center'> Timing Histograms </h2>"<<std::endl;
+      outfile<<" <img width=\"500em\" src='"<<("c_"+name_s+"_in.png")<<"'/>"<<std::endl;
+      outfile<<" <img width=\"500em\" src='"<<("c_"+name_s+"_out.png")<<"'/>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
       outfile<<"</body>"<<std::endl;
       outfile<<"</html>"<<std::endl;
       outfile.close();
@@ -228,7 +246,9 @@ int main(int argc, char *argv[])
       {
         TH1F *h_t1out=(TH1F*)f_receiver->Get(("h_t1out_"+name_s+"_"+itoa(i_pin)).c_str());
         TH1F *h_t2out=(TH1F*)f_receiver->Get(("h_t2out_"+name_s+"_"+itoa(i_pin)).c_str());
+        TH1F *h_nStubs=(TH1F*)f_receiver->Get(("h_nStubs_"+name_s+"_"+itoa(i_pin)).c_str());
         makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_out_Pin"+itoa(i_pin), "Receiver", "ns");
+        makeCanvas(h_nStubs, percentile, name_s+"_nStubs_Pin"+itoa(i_pin), "Receiver", "nStubs");
       }
       f_receiver->Close();
       
@@ -238,32 +258,48 @@ int main(int argc, char *argv[])
       outfile<<" <link rel=\"StyleSheet\" type=\"text/css\" href=\"PRBDashboardStyle.css\" />"<<std::endl;
       outfile<<"</head>"<<std::endl;
       outfile<<"<body>"<<std::endl;
-      outfile<<"<h1 align='center'> L1 Track Trigger Timing Dashboard </h1>"<<std::endl;
+      outfile<<"<h1 align='center'> L1 Track Trigger Timing -- Receiver Module Dashboard </h1>"<<std::endl;
       outfile<<"<p>"<<std::endl;
       outfile<<" Receiver name: "<<name_s<<"<br/>"<<std::endl;
       outfile<<" Operating frequency: "<<frequency<<"MHz <br/>"<<std::endl;
       outfile<<" Delay: "<<delayCLK<<" CLK <br/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
-      outfile<<"<table border='1'>"<<std::endl;
-      outfile<<" <tr>"<<std::endl;
-      for (unsigned int i_pin=0; i_pin<40; ++i_pin)
-      {
-        outfile<<"  <td>"<<std::endl;
-        outfile<<"   <img width=\"500em\" src='"<<("c_"+name_s+"_in_Pin"+itoa(i_pin)+".png")<<"'/>"<<std::endl;
-        outfile<<"  </td>"<<std::endl;
-      }
-      outfile<<" </tr>"<<std::endl;
-      outfile<<"</table>"<<std::endl;
-      outfile<<"<table border='1'>"<<std::endl;
-      outfile<<" <tr>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2 align='center'> Data Histograms </h2>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
       for (unsigned int i_pin=0; i_pin<8; ++i_pin)
       {
-        outfile<<"  <td>"<<std::endl;
-        outfile<<"   <img width=\"500em\" src='"<<("c_"+name_s+"_out_Pin"+itoa(i_pin)+".png")<<"'/>"<<std::endl;
-        outfile<<"  </td>"<<std::endl;
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs_Pin"+itoa(i_pin)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
       }
-      outfile<<" </tr>"<<std::endl;
-      outfile<<"</table>"<<std::endl;
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2 align='center'> Timing Histograms </h2>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      for (unsigned int i_pin=0; i_pin<40; ++i_pin)
+      {
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_in_Pin"+itoa(i_pin)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
+      }
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      for (unsigned int i_pin=0; i_pin<8; ++i_pin)
+      {
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_out_Pin"+itoa(i_pin)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
+      }
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
       outfile<<"</body>"<<std::endl;
       outfile<<"</html>"<<std::endl;
       outfile.close();

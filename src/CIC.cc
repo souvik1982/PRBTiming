@@ -27,7 +27,7 @@ CIC::CIC(std::string name, int moduleID, std::string segment, double frequency)
   v_h_t1out_.at(0)->Fill(t1out_.at(0));
   v_h_t2out_.at(0)->Fill(t2out_.at(0));
   
-  h_nStubs_=new TH1F(("h_nStubs_"+name_).c_str(), ("; CIC "+name_+" nStubs").c_str(), 1000, 0, 200.);
+  h_nStubs_=new TH1F(("h_nStubs_"+name_).c_str(), ("; CIC "+name_+" nStubs").c_str(), 200, 0, 200.);
   
   std::cout<<"LOG: Initialized CIC "<<name_<<" with moduleID = "<<moduleID_<<", segment = "<<segment_<<", operating frequency = "<<frequency_<<std::endl;
 }

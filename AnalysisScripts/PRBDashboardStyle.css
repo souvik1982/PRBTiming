@@ -1,0 +1,81 @@
+/*
+CSS for the L1 Track Trigger Timing Dashboard
+Author: Souvik Das
+Date: Apr 28, 2016
+*/
+
+body
+{
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+p
+{
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.CIC
+{
+  background-color: lightblue;
+  text-align: center;
+  width: 5em;
+  height: 3em;
+  float: left;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+}
+
+.Receiver
+{
+  background-color: pink;
+  width: 10em;
+  height: 10em;
+  float: left;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 1em;
+  padding-top: 1em;
+  border-radius: 1em;
+}
+
+.BXSplitter
+{
+  background-color: orange;
+  width: 10em;
+  height: 10em;
+  float: left;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 1em;
+  padding-top: 1em;
+  border-radius: 1em;
+}
+
+.LayerSplitter
+{
+  background-color: lightgreen;
+  width: 12em;
+  height: 10em;
+  float: left;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 1em;
+  padding-top: 1em;
+  border-radius: 1em;
+}
+
