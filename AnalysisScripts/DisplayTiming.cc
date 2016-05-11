@@ -54,7 +54,7 @@ int fixRange(TH1F *h)
 
 void makeCanvas(TH1F *h1, double percentile, std::string name_s, std::string componentType, std::string units="", bool logScale=false)
 {
-  h1->GetXaxis()->SetRange(h1->FindFirstBinAbove(0, 1)-10, h1->FindLastBinAbove(0, 1)+10);
+  h1->GetXaxis()->SetRange(h1->FindFirstBinAbove(0, 1)-20, h1->FindLastBinAbove(0, 1)+20);
   h1->SetLineColor(kRed);
   h1->SetTitle(("; "+componentType+" "+name_s+" ("+units+")").c_str());
   double perc[2]={0.5, percentile};
@@ -88,7 +88,7 @@ void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, st
 { 
   int minBin=std::min(h1->FindFirstBinAbove(0, 1), h2->FindFirstBinAbove(0, 1));
   int maxBin=std::max(h1->FindLastBinAbove(0, 1), h2->FindLastBinAbove(0, 1));
-  h1->GetXaxis()->SetRange(minBin-10, maxBin+10);
+  h1->GetXaxis()->SetRange(minBin-20, maxBin+20);
   h1->SetLineColor(kBlue);
   h2->SetLineColor(kGreen+2);
   h1->SetTitle(("; "+componentType+" "+name_s+" ("+units+")").c_str());
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
       outfile<<" <link rel=\"StyleSheet\" type=\"text/css\" href=\"PRBDashboardStyle.css\" />"<<std::endl;
       outfile<<"</head>"<<std::endl;
       outfile<<"<body>"<<std::endl;
-      outfile<<"<h1 align='center'> L1 Track Trigger Timing Dashboard </h1>"<<std::endl;
+      outfile<<"<h1 align='center'> L1 Track Trigger Timing -- CIC Dashboard </h1>"<<std::endl;
       outfile<<"<p>"<<std::endl;
       outfile<<" CIC name: "<<name_s<<"<br/>"<<std::endl;
       outfile<<" ModuleID: "<<moduleID<<"<br/>"<<std::endl;
@@ -270,6 +270,9 @@ int main(int argc, char *argv[])
       outfile<<" <h2> Data Content </h2>"<<std::endl;
       outfile<<" <table border='1'>"<<std::endl;
       outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> Total nStubs </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
       outfile<<"   <td>"<<std::endl;
       outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs_Total.png")<<"'/>"<<std::endl;
       outfile<<"   </td>"<<std::endl;
@@ -374,7 +377,7 @@ int main(int argc, char *argv[])
       outfile<<" <table border='1'"<<std::endl;
       outfile<<"  <tr>"<<std::endl;
       outfile<<"   <td>"<<std::endl;
-      outfile<<"    <p> Input time for 8 input lines <p>"<<std::endl;
+      outfile<<"    <p> Input time for 8 input lines </p>"<<std::endl;
       outfile<<"   </td>"<<std::endl;
       for (unsigned int i_pin=0; i_pin<8; ++i_pin)
       {
@@ -386,6 +389,9 @@ int main(int argc, char *argv[])
       outfile<<" </table>"<<std::endl;
       outfile<<" <table border='1'>"<<std::endl;
       outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> Output time for 8 BX output lines </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
         outfile<<"   <td>"<<std::endl;
@@ -458,7 +464,7 @@ int main(int argc, char *argv[])
       outfile<<"   <td>"<<std::endl;
       outfile<<"    <p> nStubs on the 6 layer output lines </p>"<<std::endl;
       outfile<<"   </td>"<<std::endl;
-      for (unsigned int i_layer=0; i_layer<8; ++i_layer)
+      for (unsigned int i_layer=0; i_layer<6; ++i_layer)
       {
         outfile<<"   <td>"<<std::endl;
         outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs_Layer"+itoa(i_layer)+".png")<<"'/>"<<std::endl;

@@ -180,4 +180,8 @@ void LayerSplitter::clearData()
   {
     data_PRBF2_ByPRB_.at(i).clear();
   }
+  for (unsigned int i=0; i<data_PRBF2_ByLayer_.size(); ++i)
+  {
+    data_PRBF2_ByLayer_.at(i).clear();
+  }
 }     
