@@ -14,6 +14,7 @@ class Receiver: public Component
     
     std::vector<std::vector<Stub*> > data_PRBF_RX_; // This should be 8 lines with 60 entries each. Should have a checking function.
     std::vector<TH1F*> v_h_nStubs_;
+    TH1F *h_nStubs_Total_;
     
     double delayCLK_;
 };    

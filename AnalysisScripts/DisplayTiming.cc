@@ -213,11 +213,11 @@ int main(int argc, char *argv[])
       outfile<<" Operating frequency: "<<frequency<<"MHz <br/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
       outfile<<"<p>"<<std::endl;
-      outfile<<" <h2 align='center'> Data Histograms </h2>"<<std::endl;
+      outfile<<" <h2> Data Content </h2>"<<std::endl;
       outfile<<" <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs.png")<<"'/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
       outfile<<"<p>"<<std::endl;
-      outfile<<" <h2 align='center'> Timing Histograms </h2>"<<std::endl;
+      outfile<<" <h2> Timing </h2>"<<std::endl;
       outfile<<" <img width=\"500em\" src='"<<("c_"+name_s+"_in.png")<<"'/>"<<std::endl;
       outfile<<" <img width=\"500em\" src='"<<("c_"+name_s+"_out.png")<<"'/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
@@ -250,6 +250,8 @@ int main(int argc, char *argv[])
         makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_out_Pin"+itoa(i_pin), "Receiver", "ns");
         makeCanvas(h_nStubs, percentile, name_s+"_nStubs_Pin"+itoa(i_pin), "Receiver", "nStubs");
       }
+      TH1F *h_nStubs_Total=(TH1F*)f_receiver->Get(("h_nStubs_Total_"+name_s).c_str());
+      makeCanvas(h_nStubs_Total, percentile, name_s+"_nStubs_Total", "Receiver", "nStubs");
       f_receiver->Close();
       
       std::ofstream outfile((name_s+".html").c_str());
@@ -258,16 +260,23 @@ int main(int argc, char *argv[])
       outfile<<" <link rel=\"StyleSheet\" type=\"text/css\" href=\"PRBDashboardStyle.css\" />"<<std::endl;
       outfile<<"</head>"<<std::endl;
       outfile<<"<body>"<<std::endl;
-      outfile<<"<h1 align='center'> L1 Track Trigger Timing -- Receiver Module Dashboard </h1>"<<std::endl;
+      outfile<<"<h1 align='center'> L1 Track Trigger Timing -- Receiver Dashboard </h1>"<<std::endl;
       outfile<<"<p>"<<std::endl;
       outfile<<" Receiver name: "<<name_s<<"<br/>"<<std::endl;
       outfile<<" Operating frequency: "<<frequency<<"MHz <br/>"<<std::endl;
       outfile<<" Delay: "<<delayCLK<<" CLK <br/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
       outfile<<"<p>"<<std::endl;
-      outfile<<" <h2 align='center'> Data Histograms </h2>"<<std::endl;
+      outfile<<" <h2> Data Content </h2>"<<std::endl;
       outfile<<" <table border='1'>"<<std::endl;
       outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs_Total.png")<<"'/>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> nStubs on the 8 output lines </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
       for (unsigned int i_pin=0; i_pin<8; ++i_pin)
       {
         outfile<<"   <td>"<<std::endl;
@@ -278,9 +287,12 @@ int main(int argc, char *argv[])
       outfile<<" </table>"<<std::endl;
       outfile<<"</p>"<<std::endl;
       outfile<<"<p>"<<std::endl;
-      outfile<<" <h2 align='center'> Timing Histograms </h2>"<<std::endl;
+      outfile<<" <h2> Timing </h2>"<<std::endl;
       outfile<<" <table border='1'>"<<std::endl;
       outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> Input time for 40 input lines </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
       for (unsigned int i_pin=0; i_pin<40; ++i_pin)
       {
         outfile<<"   <td>"<<std::endl;
@@ -291,6 +303,9 @@ int main(int argc, char *argv[])
       outfile<<" </table>"<<std::endl;
       outfile<<" <table border='1'>"<<std::endl;
       outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> Output time for 8 output lines </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
       for (unsigned int i_pin=0; i_pin<8; ++i_pin)
       {
         outfile<<"   <td>"<<std::endl;
@@ -320,8 +335,10 @@ int main(int argc, char *argv[])
         TH1F *h_t2in=(TH1F*)f_bxSplitter->Get(("h_t2in_"+name_s+"_"+itoa(i_BX)).c_str());
         TH1F *h_t1out=(TH1F*)f_bxSplitter->Get(("h_t1out_"+name_s+"_"+itoa(i_BX)).c_str());
         TH1F *h_t2out=(TH1F*)f_bxSplitter->Get(("h_t2out_"+name_s+"_"+itoa(i_BX)).c_str());
-        makeCanvas(h_t1in, h_t2in, "in", percentile, name_s+"_in_BX"+itoa(i_BX), "BXSplitter", "ns");
+        TH1F *h_nStubs=(TH1F*)f_bxSplitter->Get(("h_nStubs_"+name_s+"_"+itoa(i_BX)).c_str());
+        makeCanvas(h_t1in, h_t2in, "in", percentile, name_s+"_in_Pin"+itoa(i_BX), "BXSplitter", "ns");
         makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_out_BX"+itoa(i_BX), "BXSplitter", "ns");
+        makeCanvas(h_nStubs, percentile, name_s+"_nStubs_BX"+itoa(i_BX), "BXSplitter", "nStubs");
       }
       f_bxSplitter->Close();
       
@@ -331,31 +348,53 @@ int main(int argc, char *argv[])
       outfile<<" <link rel=\"StyleSheet\" type=\"text/css\" href=\"PRBDashboardStyle.css\" />"<<std::endl;
       outfile<<"</head>"<<std::endl;
       outfile<<"<body>"<<std::endl;
-      outfile<<"<h1 align='center'> L1 Track Trigger Timing Dashboard </h1>"<<std::endl;
+      outfile<<"<h1 align='center'> L1 Track Trigger Timing -- BXSplitter Dashboard </h1>"<<std::endl;
       outfile<<"<p>"<<std::endl;
       outfile<<" BXSplitter name: "<<name_s<<"<br/>"<<std::endl;
       outfile<<" Operating frequency: "<<frequency<<"MHz <br/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
-      outfile<<"<table border='1'>"<<std::endl;
-      outfile<<" <tr>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2> Data Content </p>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> nStubs on the 8 BX output lines </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
-        outfile<<"  <td>"<<std::endl;
-        outfile<<"   <img width=\"500em\" src='"<<("c_"+name_s+"_in_BX"+itoa(i_BX)+".png")<<"'/>"<<std::endl;
-        outfile<<"  </td>"<<std::endl;
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs_BX"+itoa(i_BX)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
       }
-      outfile<<" </tr>"<<std::endl;
-      outfile<<"</table>"<<std::endl;
-      outfile<<"<table border='1'>"<<std::endl;
-      outfile<<" <tr>"<<std::endl;
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2> Timing </h2>"<<std::endl;
+      outfile<<" <table border='1'"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> Input time for 8 input lines <p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
+      for (unsigned int i_pin=0; i_pin<8; ++i_pin)
+      {
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_in_Pin"+itoa(i_pin)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
+      }
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
-        outfile<<"  <td>"<<std::endl;
-        outfile<<"   <img width=\"500em\" src='"<<("c_"+name_s+"_out_BX"+itoa(i_BX)+".png")<<"'/>"<<std::endl;
-        outfile<<"  </td>"<<std::endl;
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_out_BX"+itoa(i_BX)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
       }
-      outfile<<" </tr>"<<std::endl;
-      outfile<<"</table>"<<std::endl;
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
       outfile<<"</body>"<<std::endl;
       outfile<<"</html>"<<std::endl;
       outfile.close();
@@ -374,13 +413,17 @@ int main(int argc, char *argv[])
       {
         TH1F *h_t1in=(TH1F*)f_layerSplitter->Get(("h_t1in_"+name_s+"_"+itoa(i_PRB)).c_str());
         TH1F *h_t2in=(TH1F*)f_layerSplitter->Get(("h_t2in_"+name_s+"_"+itoa(i_PRB)).c_str());
+        TH1F *h_nStubs_ByPRB=(TH1F*)f_layerSplitter->Get(("h_nStubs_ByPRB_"+name_s+"_"+itoa(i_PRB)).c_str());
         makeCanvas(h_t1in, h_t2in, "in", percentile, name_s+"_PRB"+itoa(i_PRB), "LayerSplitter", "ns");
+        makeCanvas(h_nStubs_ByPRB, percentile, name_s+"_nStubs_PRB"+itoa(i_PRB), "LayerSplitter", "nStubs");
       }
       for (unsigned int i_layer=0; i_layer<6; ++i_layer)
       {
         TH1F *h_t1out=(TH1F*)f_layerSplitter->Get(("h_t1out_"+name_s+"_"+itoa(i_layer)).c_str());
         TH1F *h_t2out=(TH1F*)f_layerSplitter->Get(("h_t2out_"+name_s+"_"+itoa(i_layer)).c_str());
+        TH1F *h_nStubs_ByLayer=(TH1F*)f_layerSplitter->Get(("h_nStubs_ByLayer_"+name_s+"_"+itoa(i_layer)).c_str());
         makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_layer"+itoa(i_layer), "LayerSplitter", "ns");
+        makeCanvas(h_nStubs_ByLayer, percentile, name_s+"_nStubs_Layer"+itoa(i_layer), "LayerSplitter", "nStubs");
       }
       f_layerSplitter->Close();
       
@@ -395,26 +438,58 @@ int main(int argc, char *argv[])
       outfile<<" LayerSplitter name: "<<name_s<<"<br/>"<<std::endl;
       outfile<<" Operating frequency: "<<frequency<<"MHz <br/>"<<std::endl;
       outfile<<"</p>"<<std::endl;
-      outfile<<"<table border='1'>"<<std::endl;
-      outfile<<" <tr>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2> Data Content </p>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> nStubs on the 8 PRB input lines </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
       for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
       {
-        outfile<<"  <td>"<<std::endl;
-        outfile<<"   <img width=\"500em\" src='"<<("c_"+name_s+"_PRB"+itoa(i_PRB)+".png")<<"'/>"<<std::endl;
-        outfile<<"  </td>"<<std::endl;
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs_PRB"+itoa(i_PRB)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
       }
-      outfile<<" </tr>"<<std::endl;
-      outfile<<"</table>"<<std::endl;
-      outfile<<"<table border='1'>"<<std::endl;
-      outfile<<" <tr>"<<std::endl;
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      outfile<<"   <td>"<<std::endl;
+      outfile<<"    <p> nStubs on the 6 layer output lines </p>"<<std::endl;
+      outfile<<"   </td>"<<std::endl;
+      for (unsigned int i_layer=0; i_layer<8; ++i_layer)
+      {
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_nStubs_Layer"+itoa(i_layer)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
+      }
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
+      outfile<<"<p>"<<std::endl;
+      outfile<<" <h2> Timing </h2>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
+      for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
+      {
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_PRB"+itoa(i_PRB)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
+      }
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<" <table border='1'>"<<std::endl;
+      outfile<<"  <tr>"<<std::endl;
       for (unsigned int i_layer=0; i_layer<6; ++i_layer)
       {
-        outfile<<"  <td>"<<std::endl;
-        outfile<<"   <img width=\"500em\" src='"<<("c_"+name_s+"_layer"+itoa(i_layer)+".png")<<"'/>"<<std::endl;
-        outfile<<"  </td>"<<std::endl;
+        outfile<<"   <td>"<<std::endl;
+        outfile<<"    <img width=\"500em\" src='"<<("c_"+name_s+"_layer"+itoa(i_layer)+".png")<<"'/>"<<std::endl;
+        outfile<<"   </td>"<<std::endl;
       }
-      outfile<<" </tr>"<<std::endl;
-      outfile<<"</table>"<<std::endl;
+      outfile<<"  </tr>"<<std::endl;
+      outfile<<" </table>"<<std::endl;
+      outfile<<"</p>"<<std::endl;
       outfile<<"</body>"<<std::endl;
       outfile<<"</html>"<<std::endl;
       outfile.close();

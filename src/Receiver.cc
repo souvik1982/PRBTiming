@@ -28,6 +28,7 @@ Receiver::Receiver(std::string name, double frequency, double delayCLK)
   
     v_h_nStubs_.push_back(new TH1F(("h_nStubs_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" nStubs").c_str(), 200, 0, 200.));
   }
+  h_nStubs_Total_=new TH1F(("h_nStubs_Total_"+name_).c_str(), ("; Receiver "+name_+" Total nStubs").c_str(), 200, 0, 200.);
   
   data_PRBF_RX_.resize(8);
   
@@ -49,6 +50,7 @@ bool Receiver::computeOutputTimes()
     v_h_t1in_.at(i)->Fill(t1in_.at(i));
     v_h_t2in_.at(i)->Fill(t2in_.at(i));
   }
+  double totalStubs=0;
   for (unsigned int i=0; i<8; ++i)
   {
     t1out_.at(i)=t2in_.at(i*5)+1./frequency_*1000.;
@@ -58,7 +60,9 @@ bool Receiver::computeOutputTimes()
     v_h_t2out_.at(i)->Fill(t2out_.at(i));
     
     v_h_nStubs_.at(i)->Fill(data_PRBF_RX_.at(i).size());
+    totalStubs+=data_PRBF_RX_.at(i).size();
   }
+  h_nStubs_Total_->Fill(totalStubs);
   return true;
 }
 
@@ -69,6 +73,7 @@ void Receiver::writeDataHistograms()
   {
     v_h_nStubs_.at(i)->Write();
   }
+  h_nStubs_Total_->Write();
   file->Close();
 }
 
