@@ -48,10 +48,12 @@ int main(int argc, char *argv[])
   std::vector<float> *stubs_modId=0;
   std::vector<float> *stubs_r=0;
   std::vector<float> *stubs_coordy=0;
+  std::vector<float> *stubs_simpT=0;
   
   tree->SetBranchAddress("TTStubs_modId", &(stubs_modId));
   tree->SetBranchAddress("TTStubs_r", &(stubs_r));
   tree->SetBranchAddress("TTStubs_coordy", &(stubs_coordy));
+  tree->SetBranchAddress("TTStubs_simPt", &(stubs_simpT));
   
   unsigned int nEvents=tree->GetEntries();
   for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
@@ -67,27 +69,31 @@ int main(int argc, char *argv[])
       {
         float stub_modId=stubs_modId->at(i_stub);
         float stub_coordy=stubs_coordy->at(i_stub);
-        int layer=int(stub_modId/10000);
-        std::string segment;
-        if (5<=layer && layer<=7)
+        float stub_simpT=stubs_simpT->at(i_stub);
+        if (fabs(stub_simpT)>3)
         {
-          if (stub_coordy<16) segment="L";
-          else segment="R";
-        }
-        else if (8<=layer && layer<=10)
-        {
-          if (stub_coordy==0) segment="L";
-          else segment="R";
-        }
-        if (map_modId_CIC->find(itoa(float(stub_modId))+segment)!=map_modId_CIC->end())
-        {
-          CIC *cic=(*map_modId_CIC)[itoa(float(stub_modId))+segment];
-          cic->fillInputData(i_BX, stub_modId, layer);
-          // std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
-        }
-        else
-        {
-          // std::cout<<"WARNING: ModuleID = "<<stub_modId<<" appears in the stub data but does not exist in the Schematic."<<std::endl;
+          int layer=int(stub_modId/10000);
+          std::string segment;
+          if (5<=layer && layer<=7)
+          {
+            if (stub_coordy<16) segment="L";
+            else segment="R";
+          }
+          else if (8<=layer && layer<=10)
+          {
+            if (stub_coordy==0) segment="L";
+            else segment="R";
+          }
+          if (map_modId_CIC->find(itoa(float(stub_modId))+segment)!=map_modId_CIC->end())
+          {
+            CIC *cic=(*map_modId_CIC)[itoa(float(stub_modId))+segment];
+            cic->fillInputData(i_BX, stub_modId, layer);
+            // std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
+          }
+          else
+          {
+            // std::cout<<"WARNING: ModuleID = "<<stub_modId<<" appears in the stub data but does not exist in the Schematic."<<std::endl;
+          }
         }
       }
     }
@@ -96,6 +102,7 @@ int main(int argc, char *argv[])
     
     // std::cout<<"Start with CIC"<<std::endl;
     // First do the CICs
+    // for (MapComponentRelations::reverse_iterator i_comp=map_componentRelations->rbegin(); i_comp!=map_componentRelations->rend(); ++i_comp)
     for (MapComponentRelations::iterator i_comp=map_componentRelations->begin(); i_comp!=map_componentRelations->end(); ++i_comp)
     {
       ComponentRelation *componentRelation=i_comp->second;
@@ -103,8 +110,11 @@ int main(int argc, char *argv[])
       
       if (component->get_type()=="CIC")
       {
+        // Compute timing for CIC
         CIC *cic=(CIC*)component;
         cic->computeOutputTimes();
+        
+        // Distribute data, and t1in and t2in to Receiver
         for (unsigned int i_pin=0; i_pin<componentRelation->i_comp_.size(); ++i_pin)
         {
           int targetIndex=componentRelation->i_comp_.at(i_pin);
@@ -114,6 +124,10 @@ int main(int argc, char *argv[])
             {
               Receiver *receiver=(Receiver*)((*map_componentRelations)[targetIndex]->comp_);
               receiver->fillInputData(componentRelation->i_input_.at(i_pin), cic->data_PRBF0_);
+              
+              // Update the t1in and t2in
+              receiver->set_t1in(componentRelation->i_input_.at(i_pin), cic->get_t1out(componentRelation->i_output_.at(i_pin)));
+              receiver->set_t2in(componentRelation->i_input_.at(i_pin), cic->get_t2out(componentRelation->i_output_.at(i_pin)));
             }
             else
             {

@@ -11,8 +11,8 @@ Receiver::Receiver(std::string name, double frequency, double delayCLK)
   
   for (unsigned int i=0; i<40; ++i)
   {
-    t1in_.push_back(1./frequency_*1000.);
-    t2in_.push_back(64./frequency_*1000.);
+    t1in_.push_back(-999);
+    t2in_.push_back(-999);
     
     v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t1in").c_str(), 2000, 0, 1000.));
     v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" t2in").c_str(), 2000, 0, 1000.));
@@ -28,7 +28,7 @@ Receiver::Receiver(std::string name, double frequency, double delayCLK)
   
     v_h_nStubs_.push_back(new TH1F(("h_nStubs_"+name_+"_"+itoa(i)).c_str(), ("; Receiver "+name_+" Link "+itoa(i)+" nStubs").c_str(), 200, 0, 200.));
   }
-  h_nStubs_Total_=new TH1F(("h_nStubs_Total_"+name_).c_str(), ("; Receiver "+name_+" Total nStubs").c_str(), 1000, 0., 1000.);
+  h_nStubs_Total_=new TH1F(("h_nStubs_Total_"+name_).c_str(), ("; Receiver "+name_+" Total nStubs").c_str(), 200, 0., 1000.);
   
   data_PRBF_RX_.resize(8);
   

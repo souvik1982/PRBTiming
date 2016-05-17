@@ -12,8 +12,8 @@ CIC::CIC(std::string name, int moduleID, std::string segment, double frequency)
   
   t1in_.push_back(0);
   t2in_.push_back(0);
-  t1out_.push_back(1./frequency*1000.);
-  t2out_.push_back(64./frequency*1000.);
+  t1out_.push_back(1./frequency_*1000.);
+  t2out_.push_back(64./frequency_*1000.);
   
   v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_).c_str(), ("; CIC "+name_+" t1in (ns)").c_str(), 800, 0, 400.));
   v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_).c_str(), ("; CIC "+name_+" t2in (ns)").c_str(), 800, 0, 400.));

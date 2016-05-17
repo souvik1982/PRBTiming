@@ -21,6 +21,14 @@
 #include "../src/CommandLineArguments.cc"
 #include "../src/ReadConfigurationFile.cc"
 
+std::string ftoa1(double i) 
+{
+  char res[10];
+  sprintf(res, "%2.1f", i);
+  std::string ret(res);
+  return ret;
+}
+
 std::string ftoa2(double i) 
 {
   char res[10];
@@ -37,23 +45,10 @@ std::string ftoa3(double i)
   return ret;
 }
 
-int fixRange(TH1F *h)
+void makeCanvas(TH1F *h1, double percentile, std::string name_s, std::string componentType, std::string units="", int rebin=1, bool logScale=false)
 {
-  double nBinsHave=h->FindLastBinAbove(0, 1)+1;
-  double nEntries=h->GetEntries();
-  int rebin=0;  
-  /*if (nEntries>0 && nBinsHave>0)
-  {
-    rebin=int(200.*nBinsHave/nEntries);
-    if (rebin>0) h->Rebin(rebin);
-    else rebin=-1;
-  }*/
-  h->GetXaxis()->SetRange(h->FindFirstBinAbove(0, 1)-1, h->FindLastBinAbove(0, 1)+1);
-  return rebin;
-}
-
-void makeCanvas(TH1F *h1, double percentile, std::string name_s, std::string componentType, std::string units="", bool logScale=false)
-{
+  h1->Rebin(rebin);
+  
   h1->GetXaxis()->SetRange(h1->FindFirstBinAbove(0, 1)-20, h1->FindLastBinAbove(0, 1)+20);
   h1->SetLineColor(kRed);
   h1->SetTitle(("; "+componentType+" "+name_s+" ("+units+")").c_str());
@@ -84,14 +79,19 @@ void makeCanvas(TH1F *h1, double percentile, std::string name_s, std::string com
   c->SaveAs(("c_"+name_s+".png").c_str());
 }
 
-void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, std::string name_s, std::string componentType, std::string units="", bool logScale=false)
+void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, std::string name_s, std::string componentType, std::string units="", int rebin=1, bool logScale=false)
 { 
+  h1->Rebin(rebin);
+  h2->Rebin(rebin);
+  
   int minBin=std::min(h1->FindFirstBinAbove(0, 1), h2->FindFirstBinAbove(0, 1));
   int maxBin=std::max(h1->FindLastBinAbove(0, 1), h2->FindLastBinAbove(0, 1));
   h1->GetXaxis()->SetRange(minBin-20, maxBin+20);
   h1->SetLineColor(kBlue);
   h2->SetLineColor(kGreen+2);
   h1->SetTitle(("; "+componentType+" "+name_s+" ("+units+")").c_str());
+  h1->Scale(1./h1->GetSumOfWeights());
+  h2->Scale(1./h2->GetSumOfWeights());
   h1->SetMaximum(std::max(h1->GetMaximum(), h2->GetMaximum())*1.1);
   double perc1[2]={0.5, percentile};
   double values1[2];
@@ -99,6 +99,11 @@ void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, st
   double perc2[2]={0.5, percentile};
   double values2[2];
   h2->GetQuantiles(2, values2, perc2);
+  
+  values1[0]=h1->GetBinLowEdge(h1->FindBin(values1[0]));
+  values1[1]=h1->GetBinLowEdge(h1->FindBin(values1[1]));
+  values2[0]=h1->GetBinLowEdge(h1->FindBin(values2[0]));
+  values2[1]=h1->GetBinLowEdge(h1->FindBin(values2[1]));
   
   TCanvas *c=new TCanvas(("c_"+name_s).c_str(), ("c_"+name_s).c_str(), 700, 700);
   TPad *p_1=new TPad(("p_1_"+name_s).c_str(), ("p_1_"+name_s).c_str(), 0, 0, 1.0, 0.90);
@@ -121,13 +126,13 @@ void makeCanvas(TH1F *h1, TH1F *h2, std::string direction, double percentile, st
   leg->SetBorderSize(0);
   if (direction=="in")
   {
-    leg->AddEntry(h1, ("t1in #mu = "+ftoa2(values1[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa2(values1[1])+" "+units).c_str());
-    leg->AddEntry(h2, ("t2in #mu = "+ftoa2(values2[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa2(values2[1])+" "+units).c_str());
+    leg->AddEntry(h1, ("t1in #mu = "+ftoa1(values1[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa1(values1[1])+" "+units).c_str());
+    leg->AddEntry(h2, ("t2in #mu = "+ftoa1(values2[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa1(values2[1])+" "+units).c_str());
   } 
   else
   {
-    leg->AddEntry(h1, ("t1out #mu = "+ftoa2(values1[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa2(values1[1])+" "+units).c_str());
-    leg->AddEntry(h2, ("t2out #mu = "+ftoa2(values2[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa2(values2[1])+" "+units).c_str());
+    leg->AddEntry(h1, ("t1out #mu = "+ftoa1(values1[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa1(values1[1])+" "+units).c_str());
+    leg->AddEntry(h2, ("t2out #mu = "+ftoa1(values2[0])+", #Lambda_{"+ftoa2(percentile)+"} = "+ftoa1(values2[1])+" "+units).c_str());
   } 
   leg->Draw();
   p_2->Update();
@@ -428,7 +433,7 @@ int main(int argc, char *argv[])
         TH1F *h_t1out=(TH1F*)f_layerSplitter->Get(("h_t1out_"+name_s+"_"+itoa(i_layer)).c_str());
         TH1F *h_t2out=(TH1F*)f_layerSplitter->Get(("h_t2out_"+name_s+"_"+itoa(i_layer)).c_str());
         TH1F *h_nStubs_ByLayer=(TH1F*)f_layerSplitter->Get(("h_nStubs_ByLayer_"+name_s+"_"+itoa(i_layer)).c_str());
-        makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_layer"+itoa(i_layer), "LayerSplitter", "ns");
+        makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_layer"+itoa(i_layer), "LayerSplitter", "ns", 10);
         makeCanvas(h_nStubs_ByLayer, percentile, name_s+"_nStubs_Layer"+itoa(i_layer), "LayerSplitter", "nStubs");
       }
       f_layerSplitter->Close();

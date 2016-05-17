@@ -64,7 +64,7 @@ bool BXSplitter::computeOutputTimes()
     for (unsigned int i_BX=0; i_BX<8; ++i_BX)
     {
       t1out_.at(i_BX)=maxtin;
-      t2out_.at(i_BX)=maxtin+data_PRBF1_.at(i_BX).size()*frequency_/1000.;
+      t2out_.at(i_BX)=maxtin+data_PRBF1_.at(i_BX).size()/frequency_*1000.;
       
       v_h_t1out_.at(i_BX)->Fill(t1out_.at(i_BX));
       v_h_t2out_.at(i_BX)->Fill(t2out_.at(i_BX));

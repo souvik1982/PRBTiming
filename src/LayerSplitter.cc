@@ -14,8 +14,8 @@ LayerSplitter::LayerSplitter(std::string name, double frequency)
     t1in_.push_back(-999);
     t2in_.push_back(-999);
     
-    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t1in").c_str(), 2000, 0, 1000.));
-    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t2in").c_str(), 2000, 0, 1000.));
+    v_h_t1in_.push_back(new TH1F(("h_t1in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t1in").c_str(), 2000, 0, 2000.));
+    v_h_t2in_.push_back(new TH1F(("h_t2in_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" t2in").c_str(), 2000, 0, 2000.));
   
     v_h_nStubs_ByPRB_.push_back(new TH1F(("h_nStubs_ByPRB_"+name_+"_"+itoa(i_PRB)).c_str(), ("; LayerSplitter "+name_+" PRB "+itoa(i_PRB)+" nStubs").c_str(), 200, 0, 200.));
   }
@@ -24,8 +24,8 @@ LayerSplitter::LayerSplitter(std::string name, double frequency)
     t1out_.push_back(-999);
     t2out_.push_back(-999);
     
-    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t1out").c_str(), 2000, 0, 1000.));
-    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t2out").c_str(), 2000, 0, 1000.));
+    v_h_t1out_.push_back(new TH1F(("h_t1out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t1out").c_str(), 2000, 0, 2000.));
+    v_h_t2out_.push_back(new TH1F(("h_t2out_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" layer "+itoa(i_layer)+" t2out").c_str(), 2000, 0, 2000.));
   
     v_h_nStubs_ByLayer_.push_back(new TH1F(("h_nStubs_ByLayer_"+name_+"_"+itoa(i_layer)).c_str(), ("; LayerSplitter "+name_+" Layer "+itoa(i_layer)+" nStubs").c_str(), 200, 0, 200.));
   }
@@ -68,7 +68,7 @@ bool LayerSplitter::computeOutputTimes()
         if (clk<data_PRBF2_ByPRB_.at(i_PRB).size())
         {
           int layer=data_PRBF2_ByPRB_.at(i_PRB).at(clk)->layer_;
-          if (layer==5)
+          /*if (layer==5)
           {
             maxCLK_layer0=clk;
             if (minCLK_layer0==-1) minCLK_layer0=clk;
@@ -97,6 +97,36 @@ bool LayerSplitter::computeOutputTimes()
           {
             maxCLK_layer5=clk;
             if (minCLK_layer5==-1) minCLK_layer5=clk;
+          }*/
+          if (layer==10)
+          {
+            maxCLK_layer5=clk;
+            if (minCLK_layer5==-1) minCLK_layer5=clk;
+          }
+          else if (layer==9)
+          {
+            maxCLK_layer4=clk;
+            if (minCLK_layer4==-1) minCLK_layer4=clk;
+          }
+          else if (layer==8)
+          {
+            maxCLK_layer3=clk;
+            if (minCLK_layer3==-1) minCLK_layer3=clk;
+          }
+          else if (layer==7)
+          {
+            maxCLK_layer2=clk;
+            if (minCLK_layer2==-1) minCLK_layer2=clk;
+          }
+          else if (layer==6)
+          {
+            maxCLK_layer1=clk;
+            if (minCLK_layer1==-1) minCLK_layer1=clk;
+          }
+          else if (layer==5)
+          {
+            maxCLK_layer0=clk;
+            if (minCLK_layer0==-1) minCLK_layer0=clk;
           }
         }
       }
@@ -121,20 +151,20 @@ bool LayerSplitter::computeOutputTimes()
     }
     
     // Compute t1out for each layer
-    t1out_.at(0)=mintin+(minCLK_layer0+1)*frequency_/1000.;
-    t1out_.at(1)=mintin+(minCLK_layer1+1)*frequency_/1000.;
-    t1out_.at(2)=mintin+(minCLK_layer2+1)*frequency_/1000.;
-    t1out_.at(3)=mintin+(minCLK_layer3+1)*frequency_/1000.;
-    t1out_.at(4)=mintin+(minCLK_layer4+1)*frequency_/1000.;
-    t1out_.at(5)=mintin+(minCLK_layer5+1)*frequency_/1000.;
+    t1out_.at(0)=mintin+(minCLK_layer0+1)/frequency_*1000.;
+    t1out_.at(1)=mintin+(minCLK_layer1+1)/frequency_*1000.;
+    t1out_.at(2)=mintin+(minCLK_layer2+1)/frequency_*1000.;
+    t1out_.at(3)=mintin+(minCLK_layer3+1)/frequency_*1000.;
+    t1out_.at(4)=mintin+(minCLK_layer4+1)/frequency_*1000.;
+    t1out_.at(5)=mintin+(minCLK_layer5+1)/frequency_*1000.;
     
     // Compute t2out for each layer
-    t2out_.at(0)=mintin+(maxCLK_layer0+1)*frequency_/1000.;
-    t2out_.at(1)=mintin+(maxCLK_layer1+1)*frequency_/1000.;
-    t2out_.at(2)=mintin+(maxCLK_layer2+1)*frequency_/1000.;
-    t2out_.at(3)=mintin+(maxCLK_layer3+1)*frequency_/1000.;
-    t2out_.at(4)=mintin+(maxCLK_layer4+1)*frequency_/1000.;
-    t2out_.at(5)=mintin+(maxCLK_layer5+1)*frequency_/1000.;
+    t2out_.at(0)=mintin+(maxCLK_layer0+1)/frequency_*1000.;
+    t2out_.at(1)=mintin+(maxCLK_layer1+1)/frequency_*1000.;
+    t2out_.at(2)=mintin+(maxCLK_layer2+1)/frequency_*1000.;
+    t2out_.at(3)=mintin+(maxCLK_layer3+1)/frequency_*1000.;
+    t2out_.at(4)=mintin+(maxCLK_layer4+1)/frequency_*1000.;
+    t2out_.at(5)=mintin+(maxCLK_layer5+1)/frequency_*1000.;
     
     // Fill histograms
     for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
