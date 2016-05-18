@@ -48,6 +48,7 @@ std::string ftoa3(double i)
 void makeCanvas(TH1F *h1, double percentile, std::string name_s, std::string componentType, std::string units="", int rebin=1, bool logScale=false)
 {
   h1->Rebin(rebin);
+  h1->SetLineWidth(2);
   
   h1->GetXaxis()->SetRange(h1->FindFirstBinAbove(0, 1)-20, h1->FindLastBinAbove(0, 1)+20);
   h1->SetLineColor(kRed);
