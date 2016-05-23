@@ -9,8 +9,7 @@
 #include <sstream>
 
 #include "TH1F.h"
-#include "TFile.h"
-#include "TTree.h"
+#include "TChain.h"
 
 #include "interface/ComponentRelation.h"
 #include "interface/Stub.h"
@@ -42,8 +41,8 @@ int main(int argc, char *argv[])
   readConfigurationFile(schematicDir, schematicFile, map_componentRelations, map_modId_CIC);
   
   // Read ROOT event files and iterate
-  TFile *eventFile=new TFile((inputDir+"/"+inputFile).c_str());
-  TTree *tree=(TTree*)eventFile->Get("ntupler/tree");
+  TChain *tree=new TChain("ntupler/tree");
+  tree->Add((inputDir+"/"+inputFile).c_str());
   
   std::vector<float> *stubs_modId=0;
   std::vector<float> *stubs_r=0;
