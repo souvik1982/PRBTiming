@@ -202,7 +202,7 @@ int main(int argc, char *argv[])
       TH1F *h_nStubs_cic=(TH1F*)f_cic->Get(("h_nStubs_"+name_s).c_str());
       makeCanvas(h_t1in_cic, h_t2in_cic, "in", percentile, name_s+"_in", "CIC", "ns");
       makeCanvas(h_t1out_cic, h_t2out_cic, "out", percentile, name_s+"_out", "CIC", "ns");
-      makeCanvas(h_nStubs_cic, percentile, name_s+"_nStubs", "CIC", "nStubs");
+      makeCanvas(h_nStubs_cic, percentile, name_s+"_nStubs", "CIC", "nStubs", 10);
       f_cic->Close();
       
       std::ofstream outfile((name_s+".html").c_str());
@@ -254,7 +254,7 @@ int main(int argc, char *argv[])
         TH1F *h_t2out=(TH1F*)f_receiver->Get(("h_t2out_"+name_s+"_"+itoa(i_pin)).c_str());
         TH1F *h_nStubs=(TH1F*)f_receiver->Get(("h_nStubs_"+name_s+"_"+itoa(i_pin)).c_str());
         makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_out_Pin"+itoa(i_pin), "Receiver", "ns");
-        makeCanvas(h_nStubs, percentile, name_s+"_nStubs_Pin"+itoa(i_pin), "Receiver", "nStubs");
+        makeCanvas(h_nStubs, percentile, name_s+"_nStubs_Pin"+itoa(i_pin), "Receiver", "nStubs", 10);
       }
       TH1F *h_nStubs_Total=(TH1F*)f_receiver->Get(("h_nStubs_Total_"+name_s).c_str());
       makeCanvas(h_nStubs_Total, percentile, name_s+"_nStubs_Total", "Receiver", "nStubs");
@@ -347,7 +347,7 @@ int main(int argc, char *argv[])
         TH1F *h_nStubs=(TH1F*)f_bxSplitter->Get(("h_nStubs_"+name_s+"_"+itoa(i_BX)).c_str());
         makeCanvas(h_t1in, h_t2in, "in", percentile, name_s+"_in_Pin"+itoa(i_BX), "BXSplitter", "ns");
         makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_out_BX"+itoa(i_BX), "BXSplitter", "ns", 10);
-        makeCanvas(h_nStubs, percentile, name_s+"_nStubs_BX"+itoa(i_BX), "BXSplitter", "nStubs");
+        makeCanvas(h_nStubs, percentile, name_s+"_nStubs_BX"+itoa(i_BX), "BXSplitter", "nStubs", 10);
       }
       f_bxSplitter->Close();
       
@@ -427,7 +427,7 @@ int main(int argc, char *argv[])
         TH1F *h_t2in=(TH1F*)f_layerSplitter->Get(("h_t2in_"+name_s+"_"+itoa(i_PRB)).c_str());
         TH1F *h_nStubs_ByPRB=(TH1F*)f_layerSplitter->Get(("h_nStubs_ByPRB_"+name_s+"_"+itoa(i_PRB)).c_str());
         makeCanvas(h_t1in, h_t2in, "in", percentile, name_s+"_PRB"+itoa(i_PRB), "LayerSplitter", "ns", 10);
-        makeCanvas(h_nStubs_ByPRB, percentile, name_s+"_nStubs_PRB"+itoa(i_PRB), "LayerSplitter", "nStubs");
+        makeCanvas(h_nStubs_ByPRB, percentile, name_s+"_nStubs_PRB"+itoa(i_PRB), "LayerSplitter", "nStubs", 10);
       }
       for (unsigned int i_layer=0; i_layer<6; ++i_layer)
       {
@@ -435,7 +435,7 @@ int main(int argc, char *argv[])
         TH1F *h_t2out=(TH1F*)f_layerSplitter->Get(("h_t2out_"+name_s+"_"+itoa(i_layer)).c_str());
         TH1F *h_nStubs_ByLayer=(TH1F*)f_layerSplitter->Get(("h_nStubs_ByLayer_"+name_s+"_"+itoa(i_layer)).c_str());
         makeCanvas(h_t1out, h_t2out, "out", percentile, name_s+"_layer"+itoa(i_layer), "LayerSplitter", "ns", 10);
-        makeCanvas(h_nStubs_ByLayer, percentile, name_s+"_nStubs_Layer"+itoa(i_layer), "LayerSplitter", "nStubs");
+        makeCanvas(h_nStubs_ByLayer, percentile, name_s+"_nStubs_Layer"+itoa(i_layer), "LayerSplitter", "nStubs", 10);
       }
       f_layerSplitter->Close();
       
