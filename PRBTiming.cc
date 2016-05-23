@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
   std::string schematicFile="Schematic.txt";
   std::string inputDir;
   std::string inputFile="tracks.root";
+  int nEvents=-1;
   
   // Get command line arguments
   std::map<std::string, std::string> cmdMap=commandLineArguments(argc, argv);
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
   if (cmdMap.find("-schematicFile")!=cmdMap.end()) schematicFile=cmdMap["-schematicFile"];
   if (cmdMap.find("-inputDir")!=cmdMap.end())  inputDir=cmdMap["-inputDir"];
   if (cmdMap.find("-inputFile")!=cmdMap.end()) inputFile=cmdMap["-inputFile"];
+  if (cmdMap.find("-nEvents")!=cmdMap.end()) nEvents=atoi(cmdMap["-nEvents"].c_str());
   
   // Read the schematic file recursively
   MapComponentRelations *map_componentRelations=new MapComponentRelations;
@@ -44,7 +46,7 @@ int main(int argc, char *argv[])
   TChain *tree=new TChain("ntupler/tree");
   tree->Add((inputDir+"/"+inputFile).c_str());
   
-  std::vector<float> *stubs_modId=0;
+  std::vector<int> *stubs_modId=0;
   std::vector<float> *stubs_r=0;
   std::vector<float> *stubs_coordy=0;
   std::vector<float> *stubs_simpT=0;
@@ -54,9 +56,8 @@ int main(int argc, char *argv[])
   tree->SetBranchAddress("TTStubs_coordy", &(stubs_coordy));
   tree->SetBranchAddress("TTStubs_simPt", &(stubs_simpT));
   
-  unsigned int nEvents=tree->GetEntries();
+  if (nEvents==-1) nEvents=tree->GetEntries();
   for (unsigned int i_event=0; i_event<nEvents; i_event+=8)
-  // for (unsigned int i_event=0; i_event<200; i_event+=8)
   {
   
     // Bunch 8 events into a train
@@ -66,12 +67,13 @@ int main(int argc, char *argv[])
       tree->GetEntry(j_event);
       for (unsigned int i_stub=0; i_stub<stubs_modId->size(); ++i_stub)
       {
-        float stub_modId=stubs_modId->at(i_stub);
+        int stub_modId=stubs_modId->at(i_stub);
         float stub_coordy=stubs_coordy->at(i_stub);
         float stub_simpT=stubs_simpT->at(i_stub);
+        
         if (fabs(stub_simpT)>3)
         {
-          int layer=int(stub_modId/10000);
+          int layer=stub_modId/10000;
           std::string segment;
           if (5<=layer && layer<=7)
           {
@@ -83,9 +85,9 @@ int main(int argc, char *argv[])
             if (stub_coordy==0) segment="L";
             else segment="R";
           }
-          if (map_modId_CIC->find(itoa(float(stub_modId))+segment)!=map_modId_CIC->end())
+          if (map_modId_CIC->find(itoa(stub_modId)+segment)!=map_modId_CIC->end())
           {
-            CIC *cic=(*map_modId_CIC)[itoa(float(stub_modId))+segment];
+            CIC *cic=(*map_modId_CIC)[itoa(stub_modId)+segment];
             cic->fillInputData(i_BX, stub_modId, layer);
             // std::cout<<"Found a represented module "<<stub_modId<<", which is in layer "<<layer<<" and filled it with Stub BX = "<<i_BX<<std::endl;
           }
