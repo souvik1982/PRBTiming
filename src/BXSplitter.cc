@@ -183,6 +183,11 @@ bool BXSplitter::computeOutputTimes()
       t2out_.at(7)=mintin+(maxCLK_BX7+1)/frequency_*1000.;
       
       // Fill histograms
+      for (unsigned int i_link=0; i_link<8; ++i_link)
+      {
+        v_h_t1in_.at(i_link)->Fill(t1in_.at(i_link));
+        v_h_t2in_.at(i_link)->Fill(t2in_.at(i_link));
+      }
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
         v_h_t1out_.at(i_BX)->Fill(t1out_.at(i_BX));
