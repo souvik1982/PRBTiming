@@ -12,7 +12,8 @@ class BXSplitter: public Component
     void writeDataHistograms();
     void clearData();
     
-    std::vector<std::vector<Stub*> > data_PRBF1_; // [BX]
+    std::vector<std::vector<Stub*> > data_PRBF1_ByLink_; // [Link]
+    std::vector<std::vector<Stub*> > data_PRBF1_ByBX_;   // [BX]
     
     std::vector<TH1F*> v_h_nStubs_;
     
