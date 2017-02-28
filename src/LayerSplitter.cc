@@ -50,13 +50,20 @@ bool LayerSplitter::computeOutputTimes()
 {
   if (frequency_>0)
   {
-    // Find the min CLK at which the first stub in a layer appears, iterating over all PRBs that feed this data
-    double minCLK_layer0=-1, maxCLK_layer0=-1;
-    double minCLK_layer1=-1, maxCLK_layer1=-1;
-    double minCLK_layer2=-1, maxCLK_layer2=-1;
-    double minCLK_layer3=-1, maxCLK_layer3=-1;
-    double minCLK_layer4=-1, maxCLK_layer4=-1;
-    double minCLK_layer5=-1, maxCLK_layer5=-1;
+    // Minimum and maximum CLKs for each layer
+    std::vector<double> v_minCLK_layer(6, -1), v_maxCLK_layer(6, -1);
+    
+    // This has to be added to the min t1in over all PRBs
+    double mintin=1e10;
+    for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
+    {
+      if (t1in_.at(i_PRB)>0)
+      {
+        if (t1in_.at(i_PRB)<mintin) mintin=t1in_.at(i_PRB);
+      }
+      else
+        std::cout<<"ERROR: LayerSplitter "<<name_<<" has no t1in set for PRB = "<<i_PRB<<std::endl;
+    }
     unsigned int maxPRBSize=0;
     for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
       if (data_PRBF2_ByPRB_.at(i_PRB).size()>maxPRBSize) maxPRBSize=data_PRBF2_ByPRB_.at(i_PRB).size();
@@ -68,65 +75,14 @@ bool LayerSplitter::computeOutputTimes()
         if (clk<data_PRBF2_ByPRB_.at(i_PRB).size())
         {
           int layer=data_PRBF2_ByPRB_.at(i_PRB).at(clk)->layer_;
-          /*if (layer==5)
+          if (layer>=5 && layer<=10)
           {
-            maxCLK_layer0=clk;
-            if (minCLK_layer0==-1) minCLK_layer0=clk;
+            v_maxCLK_layer[layer-5]=clk;
+            if (v_minCLK_layer[layer-5]==-1) v_minCLK_layer[layer-5]=clk;
           }
-          else if (layer==6)
+          else
           {
-            maxCLK_layer1=clk;
-            if (minCLK_layer1==-1) minCLK_layer1=clk;
-          }
-          else if (layer==7)
-          {
-            maxCLK_layer2=clk;
-            if (minCLK_layer2==-1) minCLK_layer2=clk;
-          }
-          else if (layer==8)
-          {
-            maxCLK_layer3=clk;
-            if (minCLK_layer3==-1) minCLK_layer3=clk;
-          }
-          else if (layer==9)
-          {
-            maxCLK_layer4=clk;
-            if (minCLK_layer4==-1) minCLK_layer4=clk;
-          }
-          else if (layer==10)
-          {
-            maxCLK_layer5=clk;
-            if (minCLK_layer5==-1) minCLK_layer5=clk;
-          }*/
-          if (layer==10)
-          {
-            maxCLK_layer5=clk;
-            if (minCLK_layer5==-1) minCLK_layer5=clk;
-          }
-          else if (layer==9)
-          {
-            maxCLK_layer4=clk;
-            if (minCLK_layer4==-1) minCLK_layer4=clk;
-          }
-          else if (layer==8)
-          {
-            maxCLK_layer3=clk;
-            if (minCLK_layer3==-1) minCLK_layer3=clk;
-          }
-          else if (layer==7)
-          {
-            maxCLK_layer2=clk;
-            if (minCLK_layer2==-1) minCLK_layer2=clk;
-          }
-          else if (layer==6)
-          {
-            maxCLK_layer1=clk;
-            if (minCLK_layer1==-1) minCLK_layer1=clk;
-          }
-          else if (layer==5)
-          {
-            maxCLK_layer0=clk;
-            if (minCLK_layer0==-1) minCLK_layer0=clk;
+            std::cout<<"ERROR: In LayerSplitter "<<name_<<", received stubs from layer = "<<layer<<std::endl;
           }
         }
       }
@@ -134,37 +90,11 @@ bool LayerSplitter::computeOutputTimes()
     }
     while (clk<maxPRBSize);
     
-    // std::cout<<"LayerSplitter "<<name_<<" minCLK_layer0 = "<<minCLK_layer0<<", maxCLK_layer0 = "<<maxCLK_layer0<<std::endl;
-          
-    // This has to be added to the min t1in over all PRBs
-    double mintin=1e10;
-    for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)
+    for (unsigned int i_layer=0; i_layer<6; ++i_layer)
     {
-      if (t1in_.at(i_PRB)>0)
-      {
-        if (t1in_.at(i_PRB)<mintin) mintin=t1in_.at(i_PRB);
-      }
-      else
-      {
-        std::cout<<"ERROR: LayerSplitter "<<name_<<" has no t1in set for PRB = "<<i_PRB<<std::endl;
-      }
+      t1out_.at(i_layer)=mintin+(v_minCLK_layer[i_layer]+1)/frequency_*1000.;
+      t2out_.at(i_layer)=mintin+(v_maxCLK_layer[i_layer]+1)/frequency_*1000.;
     }
-    
-    // Compute t1out for each layer
-    t1out_.at(0)=mintin+(minCLK_layer0+1)/frequency_*1000.;
-    t1out_.at(1)=mintin+(minCLK_layer1+1)/frequency_*1000.;
-    t1out_.at(2)=mintin+(minCLK_layer2+1)/frequency_*1000.;
-    t1out_.at(3)=mintin+(minCLK_layer3+1)/frequency_*1000.;
-    t1out_.at(4)=mintin+(minCLK_layer4+1)/frequency_*1000.;
-    t1out_.at(5)=mintin+(minCLK_layer5+1)/frequency_*1000.;
-    
-    // Compute t2out for each layer
-    t2out_.at(0)=mintin+(maxCLK_layer0+1)/frequency_*1000.;
-    t2out_.at(1)=mintin+(maxCLK_layer1+1)/frequency_*1000.;
-    t2out_.at(2)=mintin+(maxCLK_layer2+1)/frequency_*1000.;
-    t2out_.at(3)=mintin+(maxCLK_layer3+1)/frequency_*1000.;
-    t2out_.at(4)=mintin+(maxCLK_layer4+1)/frequency_*1000.;
-    t2out_.at(5)=mintin+(maxCLK_layer5+1)/frequency_*1000.;
     
     // Fill histograms
     for (unsigned int i_PRB=0; i_PRB<8; ++i_PRB)

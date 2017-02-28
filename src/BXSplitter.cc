@@ -77,16 +77,21 @@ bool BXSplitter::computeOutputTimes()
         v_h_nStubs_.at(i_BX)->Fill(data_PRBF1_ByBX_.at(i_BX).size());
       }
     }
-    else // streaming
+    else // Streaming
     {
-      double minCLK_BX0=-1, maxCLK_BX0=-1;
-      double minCLK_BX1=-1, maxCLK_BX1=-1;
-      double minCLK_BX2=-1, maxCLK_BX2=-1;
-      double minCLK_BX3=-1, maxCLK_BX3=-1;
-      double minCLK_BX4=-1, maxCLK_BX4=-1;
-      double minCLK_BX5=-1, maxCLK_BX5=-1;
-      double minCLK_BX6=-1, maxCLK_BX6=-1;
-      double minCLK_BX7=-1, maxCLK_BX7=-1;
+      // Minimum and maximum CLKs for each BX
+      std::vector<double> v_minCLK_BX(8, -1), v_maxCLK_BX(8, -1);
+      
+      // This has to be added to the min t1in over all the links
+      double mintin=1e10;
+      for (unsigned int i_link=0; i_link<8; ++i_link)
+      {
+        if (t1in_.at(i_link)>0)
+        {
+          if (t1in_.at(i_link)<mintin) mintin=t1in_.at(i_link);
+        }
+        else std::cout<<"ERROR: BXSplitter "<<name_<<" has no t1in set for link "<<i_link<<std::endl;
+      }
       unsigned int maxLinkSize=0;
       for (unsigned int i_link=0; i_link<8; ++i_link)
         if (data_PRBF1_ByLink_.at(i_link).size()>maxLinkSize) maxLinkSize=data_PRBF1_ByLink_.at(i_link).size();
@@ -98,45 +103,10 @@ bool BXSplitter::computeOutputTimes()
           if (clk<data_PRBF1_ByLink_.at(i_link).size())
           {
             int bx=data_PRBF1_ByLink_.at(i_link).at(clk)->bx_;
-            if (bx==0)
+            if (bx>=0 && bx<=7)
             {
-              maxCLK_BX0=clk;
-              if (minCLK_BX0==-1) minCLK_BX0=clk;
-            }
-            else if (bx==1)
-            {
-              maxCLK_BX1=clk;
-              if (minCLK_BX1==-1) minCLK_BX1=clk;
-            }
-            else if (bx==2)
-            {
-              maxCLK_BX2=clk;
-              if (minCLK_BX2==-1) minCLK_BX2=clk;
-            }
-            else if (bx==3)
-            {
-              maxCLK_BX3=clk;
-              if (minCLK_BX3==-1) minCLK_BX3=clk;
-            }
-            else if (bx==4)
-            {
-              maxCLK_BX4=clk;
-              if (minCLK_BX4==-1) minCLK_BX4=clk;
-            }
-            else if (bx==5)
-            {
-              maxCLK_BX5=clk;
-              if (minCLK_BX5==-1) minCLK_BX5=clk;
-            }
-            else if (bx==6)
-            {
-              maxCLK_BX6=clk;
-              if (minCLK_BX6==-1) minCLK_BX6=clk;
-            }
-            else if (bx==7)
-            {
-              maxCLK_BX7=clk;
-              if (minCLK_BX7==-1) minCLK_BX7=clk;
+              v_maxCLK_BX[bx]=clk;
+              if (v_minCLK_BX[bx]==-1) v_minCLK_BX[bx]=clk;
             }
             else
             {
@@ -148,39 +118,12 @@ bool BXSplitter::computeOutputTimes()
       }
       while (clk<maxLinkSize);
       
-      // This has to be added to the min t1in over all the links
-      double mintin=1e10;
-      for (unsigned int i_link=0; i_link<8; ++i_link)
+      // Fill t1out and t2out
+      for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
-        if (t1in_.at(i_link)>0)
-        {
-          if (t1in_.at(i_link)<mintin) mintin=t1in_.at(i_link);
-        }
-        else
-        {
-          std::cout<<"ERROR: BXSplitter "<<name_<<" has no t1in set for link "<<i_link<<std::endl;
-        }
+        t1out_.at(i_BX)=mintin+(v_minCLK_BX[i_BX]+1)/frequency_*1000.;
+        t2out_.at(i_BX)=mintin+(v_maxCLK_BX[i_BX]+1)/frequency_*1000.;
       }
-      
-      // Compute t1out for each BX
-      t1out_.at(0)=mintin+(minCLK_BX0+1)/frequency_*1000.;
-      t1out_.at(1)=mintin+(minCLK_BX1+1)/frequency_*1000.;
-      t1out_.at(2)=mintin+(minCLK_BX2+1)/frequency_*1000.;
-      t1out_.at(3)=mintin+(minCLK_BX3+1)/frequency_*1000.;
-      t1out_.at(4)=mintin+(minCLK_BX4+1)/frequency_*1000.;
-      t1out_.at(5)=mintin+(minCLK_BX5+1)/frequency_*1000.;
-      t1out_.at(6)=mintin+(minCLK_BX6+1)/frequency_*1000.;
-      t1out_.at(7)=mintin+(minCLK_BX7+1)/frequency_*1000.;
-      
-      // Compute t2out for each BX
-      t2out_.at(0)=mintin+(maxCLK_BX0+1)/frequency_*1000.;
-      t2out_.at(1)=mintin+(maxCLK_BX1+1)/frequency_*1000.;
-      t2out_.at(2)=mintin+(maxCLK_BX2+1)/frequency_*1000.;
-      t2out_.at(3)=mintin+(maxCLK_BX3+1)/frequency_*1000.;
-      t2out_.at(4)=mintin+(maxCLK_BX4+1)/frequency_*1000.;
-      t2out_.at(5)=mintin+(maxCLK_BX5+1)/frequency_*1000.;
-      t2out_.at(6)=mintin+(maxCLK_BX6+1)/frequency_*1000.;
-      t2out_.at(7)=mintin+(maxCLK_BX7+1)/frequency_*1000.;
       
       // Fill histograms
       for (unsigned int i_link=0; i_link<8; ++i_link)
