@@ -14,6 +14,7 @@ class BXSplitter: public Component
     
     std::vector<std::vector<Stub*> > data_PRBF1_ByLink_; // [Link]
     std::vector<std::vector<Stub*> > data_PRBF1_ByBX_;   // [BX]
+    std::vector<std::vector<double> > time_PRBF1_ByBX_;  // [BX]
     
     std::vector<TH1F*> v_h_nStubs_;
     

@@ -79,6 +79,10 @@ bool BXSplitter::computeOutputTimes()
     }
     else // Streaming
     {
+      // Clear out data_PRBF1_ByBX_. It will be refilled by CLK. In parallel to time_PRBF1_ByBX_
+      data_PRBF1_ByBX_.clear();
+      data_PRBF1_ByBX_.resize(8);
+      
       // Minimum and maximum CLKs for each BX
       std::vector<double> v_minCLK_BX(8, -1), v_maxCLK_BX(8, -1);
       
@@ -102,11 +106,18 @@ bool BXSplitter::computeOutputTimes()
         {
           if (clk<data_PRBF1_ByLink_.at(i_link).size())
           {
-            int bx=data_PRBF1_ByLink_.at(i_link).at(clk)->bx_;
+            Stub *stub=data_PRBF1_ByLink_.at(i_link).at(clk);
+            int bx=stub->bx_;
             if (bx>=0 && bx<=7)
             {
               v_maxCLK_BX[bx]=clk;
               if (v_minCLK_BX[bx]==-1) v_minCLK_BX[bx]=clk;
+              
+              // testing
+              // std::cout<<"link = "<<link<<", bx = "<<bx<<" has stub = "<<data_PRBF1_ByLink_[i_link][clk]<<std::endl;
+              // std::cout<<"stub by bx. link = "<<link<<", bx = "<<bx<<" has stub = "<<data_PRBF1_ByBX_[bx][clk]<<std::endl;
+              data_PRBF1_ByBX_.at(bx).push_back(stub);
+              time_PRBF1_ByBX_.at(bx).push_back(mintin+(clk+1)/frequency_*1000.);
             }
             else
             {
