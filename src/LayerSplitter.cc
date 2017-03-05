@@ -161,15 +161,15 @@ bool LayerSplitter::computeOutputTimes()
           if (time<t1out_.at(i_layer)) t1out_.at(i_layer)=time;
           ++m_time_nStubs[time];
         }
-        if (t1out_.at(i_layer)!=1e5) v_h_t1out_.at(i_layer)->Fill(t1out_.at(i_layer)+1000./frequency_);
+        if (t1out_.at(i_layer)!=1e5) v_h_t1out_.at(i_layer)->Fill(t1out_.at(i_layer)+2000./frequency_);
         
         double t2out=-1;
         for (std::map<double, double>::iterator i_m_time_nStubs=m_time_nStubs.begin(); i_m_time_nStubs!=m_time_nStubs.end(); ++i_m_time_nStubs)
         {
-          double maxTime=(i_m_time_nStubs->first)+(i_m_time_nStubs->second+1.)*1000./frequency_;
-          if (maxTime>t2out) t2out=maxTime;
+          double offset=(t2out>i_m_time_nStubs->first)?t2out:i_m_time_nStubs->first;
+          t2out=offset+(i_m_time_nStubs->second)*1000./frequency_;
         }
-        if (t2out!=-1) v_h_t2out_.at(i_layer)->Fill(t2out);
+        if (t2out!=-1) v_h_t2out_.at(i_layer)->Fill(t2out+1000./frequency_);
         
         v_h_nStubs_ByLayer_.at(i_layer)->Fill(time_PRBF2_ByLayer_.at(i_layer).size());
       }
