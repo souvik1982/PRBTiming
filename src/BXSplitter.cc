@@ -131,6 +131,7 @@ bool BXSplitter::computeOutputTimes()
       while (clk<maxLinkSize);
       
       // Check if minCLK for a BX is really the minimum time
+      /* This checks out!
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
         std::cout<<"BX = "<<i_BX<<", t1out = "<<mintin+(v_minCLK_BX[i_BX]+1)/frequency_*1000.<<std::endl;
@@ -140,11 +141,12 @@ bool BXSplitter::computeOutputTimes()
         {
           double time=time_PRBF1_ByBX_.at(i_BX).at(i_stub);
           if (time<tmin) tmin=time;
-          if (time>tmax) tmax=tmax;
+          if (time>tmax) tmax=time;
         }
         std::cout<<"Min time = "<<tmin<<std::endl;
         std::cout<<"Max time = "<<tmax<<std::endl;
       }
+      */
       
       // Fill t1out and t2out
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
@@ -192,9 +194,14 @@ void BXSplitter::clearData()
   for (unsigned int i=0; i<data_PRBF1_ByLink_.size(); ++i)
   {
     data_PRBF1_ByLink_.at(i).clear();
+    t1in_.at(i)=-999;
+    t2in_.at(i)=-999;
   }
   for (unsigned int i=0; i<data_PRBF1_ByBX_.size(); ++i)
   {
     data_PRBF1_ByBX_.at(i).clear();
+    time_PRBF1_ByBX_.at(i).clear();
+    t1out_.at(i)=-999;
+    t2out_.at(i)=-999;
   }
 }

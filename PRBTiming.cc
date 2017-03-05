@@ -212,7 +212,8 @@ int main(int argc, char *argv[])
             {
               // Distribute data
               LayerSplitter *layerSplitter=(LayerSplitter*)((*map_componentRelations)[targetIndex]->comp_);
-              layerSplitter->fillInputData(componentRelation->i_output_.at(i_pin), componentRelation->i_input_.at(i_pin), bxSplitter->data_PRBF1_ByBX_);
+              // layerSplitter->fillInputData(componentRelation->i_output_.at(i_pin), componentRelation->i_input_.at(i_pin), bxSplitter->data_PRBF1_ByBX_);
+              layerSplitter->fillInputData(componentRelation->i_output_.at(i_pin), componentRelation->i_input_.at(i_pin), bxSplitter->data_PRBF1_ByBX_, bxSplitter->time_PRBF1_ByBX_);
               
               // Update the t1in and t2in 
               layerSplitter->set_t1in(componentRelation->i_input_.at(i_pin), bxSplitter->get_t1out(componentRelation->i_output_.at(i_pin)));
