@@ -128,14 +128,24 @@ bool BXSplitter::computeOutputTimes()
         }
         ++clk;
       }
-      while (clk<maxLinkSize);
+      while (clk<maxLinkSize && clk<60);
       
-      // Check if minCLK for a BX is really the minimum time
-      /* This checks out!
+      // Another implementation of parking. Re-writes the timing for each stub
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
-        std::cout<<"BX = "<<i_BX<<", t1out = "<<mintin+(v_minCLK_BX[i_BX]+1)/frequency_*1000.<<std::endl;
-        std::cout<<"t2out = "<<mintin+(v_maxCLK_BX[i_BX]+1)/frequency_*1000<<std::endl;
+        unsigned int nStubs=time_PRBF1_ByBX_.at(i_BX).size();
+        for (unsigned int i_stub=0; i_stub<nStubs; ++i_stub)
+        {
+          time_PRBF1_ByBX_.at(i_BX).at(i_stub)=mintin+(60.+i_stub)/frequency_*1000.;
+        }
+      }
+      
+      // Check if minCLK for a BX is really the minimum time
+      // Fill t1out and t2out
+      for (unsigned int i_BX=0; i_BX<8; ++i_BX)
+      {
+        // std::cout<<"BX = "<<i_BX<<", t1out = "<<mintin+(60.)/frequency_*1000.<<std::endl;
+        // std::cout<<"t2out = "<<mintin+(60.+v_maxCLK_BX[i_BX])/frequency_*1000<<std::endl;
         double tmin=999, tmax=-1;
         for (unsigned int i_stub=0; i_stub<time_PRBF1_ByBX_.at(i_BX).size(); ++i_stub)
         {
@@ -143,17 +153,20 @@ bool BXSplitter::computeOutputTimes()
           if (time<tmin) tmin=time;
           if (time>tmax) tmax=time;
         }
-        std::cout<<"Min time = "<<tmin<<std::endl;
-        std::cout<<"Max time = "<<tmax<<std::endl;
+        // std::cout<<"Min time = "<<tmin<<std::endl;
+        // std::cout<<"Max time = "<<tmax<<std::endl;
+        t1out_.at(i_BX)=tmin;
+        t2out_.at(i_BX)=tmax;
       }
-      */
       
       // Fill t1out and t2out
+      /*
       for (unsigned int i_BX=0; i_BX<8; ++i_BX)
       {
         t1out_.at(i_BX)=mintin+(v_minCLK_BX[i_BX]+1)/frequency_*1000.;
         t2out_.at(i_BX)=mintin+(v_maxCLK_BX[i_BX]+1)/frequency_*1000.;
       }
+      */
       
       // Fill histograms
       for (unsigned int i_link=0; i_link<8; ++i_link)

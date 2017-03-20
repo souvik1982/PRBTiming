@@ -104,7 +104,7 @@ void plot_LatencyVsPU(float percentile=0.9)
     g_t2outVsPU_Parking->GetYaxis()->SetTitleOffset(1.4);
     g_t2outVsPU_Parking->SetLineColor(kBlack); g_t2outVsPU_Parking->SetLineWidth(2);
     g_t2outVsPU_Streaming->SetLineColor(kRed); g_t2outVsPU_Streaming->SetLineWidth(2);
-    g_t2outVsPU_Parking->SetMinimum(0); g_t2outVsPU_Parking->SetMaximum(1000);
+    g_t2outVsPU_Parking->SetMinimum(0); g_t2outVsPU_Parking->SetMaximum(1200);
     g_t2outVsPU_Parking->Draw("ALP");
     g_t2outVsPU_Streaming->Draw("LP same");
     TLegend *leg=new TLegend(0.6, 0.2, 0.89, 0.4);
@@ -129,7 +129,7 @@ void plot_LatencyVsPU(float percentile=0.9)
   g_t2outMaxVsPU_Parking->GetYaxis()->SetTitleOffset(1.4);
   g_t2outMaxVsPU_Parking->SetLineColor(kBlack); g_t2outMaxVsPU_Parking->SetLineWidth(2);
   g_t2outMaxVsPU_Streaming->SetLineColor(kRed); g_t2outMaxVsPU_Streaming->SetLineWidth(2);
-  g_t2outMaxVsPU_Parking->SetMinimum(0); g_t2outMaxVsPU_Parking->SetMaximum(1000);
+  g_t2outMaxVsPU_Parking->SetMinimum(0); g_t2outMaxVsPU_Parking->SetMaximum(1200);
   g_t2outMaxVsPU_Parking->Draw("ALP");
   g_t2outMaxVsPU_Streaming->Draw("LP same");
   TLegend *leg=new TLegend(0.6, 0.2, 0.89, 0.4);
